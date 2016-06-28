@@ -11,6 +11,6 @@ class SwaggerController extends Controller
     {
         $swagger = $this->get('swagger');
 
-        return new JsonResponse($swagger->json());
+        return new JsonResponse($swagger->json(), 200, [], true);
     }
 }
