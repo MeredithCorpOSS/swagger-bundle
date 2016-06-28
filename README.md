@@ -1,4 +1,6 @@
-# TimeIncSwaggerBundle
+# SwaggerBundle
+
+[![Build Status](https://travis-ci.org/TimeIncOSS/swagger-bundle.svg?branch=master)](https://travis-ci.org/TimeIncOSS/swagger-bundle)
 
 This bundle provides integration of [swagger-php](https://github.com/zircote/swagger-php) in [Symfony](https://symfony.com/).
 It should only run in the dev environment, as searching for annotations at runtime is not performant. The bundle comes 

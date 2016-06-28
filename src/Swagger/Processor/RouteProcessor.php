@@ -116,7 +116,7 @@ class RouteProcessor
                 );
                 foreach ($methodParameters as $methodParameter) {
                     if ($routeVariable == $methodParameter->getName()) {
-                        if ($methodParameter->hasType()) {
+                        if (method_exists($methodParameter, 'hasType') && $methodParameter->hasType()) {
                             list($parameter->type, $parameter->format) = $this->mapType(
                                 (string) $methodParameter->getType()
                             );
