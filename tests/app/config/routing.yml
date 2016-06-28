@@ -1,0 +1,43 @@
+_swagger:
+    resource: "@SwaggerBundle/Resources/config/routing.xml"
+    prefix:   /
+
+get_foods:
+    path: /foods
+    methods: ['GET']
+    defaults: {_controller: TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Controller\FoodController::getFood}
+
+get_food:
+    path: /foods/{id}
+    methods: ['GET']
+    defaults: {_controller: TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Controller\FoodController::getFoods}
+
+post_food:
+    path: /foods
+    methods: ['POST']
+    defaults: {_controller: TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Controller\FoodController::getFoods}
+
+put_food:
+    path: /foods/{id}
+    methods: ['PUT']
+    defaults: {_controller: TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Controller\FoodController::getFoods}
+
+patch_food:
+    path: /foods/{id}
+    methods: ['PATCH']
+    defaults: {_controller: TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Controller\FoodController::getFoods}
+
+delete_food:
+    path: /foods/{id}
+    methods: ['DELETE']
+    defaults: {_controller: TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Controller\FoodController::getFoods}
+
+test_wine:
+    path: /wine/{id}
+    methods: ['GET']
+    defaults: {_controller: TimeInc\SwaggerBundle\Tests\fixtures\TestApp\Component\Controller\TestController::testAction}
+
+test_page:
+    path: /test
+    methods: ['GET']
+    defaults: {_controller: TimeInc\SwaggerBundle\Tests\fixtures\TestApp\OverrideTestBundle\Controller\TestController::testAction}

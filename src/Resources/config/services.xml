@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="swagger.class">TimeInc\SwaggerBundle\Swagger</parameter>
+        <parameter key="swagger.analyser.class">Swagger\StaticAnalyser</parameter>
+        <parameter key="swagger.analysis.class">Swagger\Analysis</parameter>
+        <parameter key="swagger.processor.symfony.class">TimeInc\SwaggerBundle\Swagger\Processor\SymfonyProcessor</parameter>
+        <parameter key="swagger.processor.route.class">TimeInc\SwaggerBundle\Swagger\Processor\RouteProcessor</parameter>
+        <parameter key="swagger.command.dump.class">TimeInc\SwaggerBundle\Command\DumpCommand</parameter>
+        <parameter key="swagger.command.export.class">TimeInc\SwaggerBundle\Command\ExportCommand</parameter>
+    </parameters>
+
+    <services>
+        <service id="swagger" class="%swagger.class%">
+            <argument type="service" id="swagger.analysis"/>
+            <argument type="service" id="swagger.analyser"/>
+            <argument/>
+            <argument/>
+        </service>
+        <service id="swagger.analyser" class="%swagger.analyser.class%"/>
+        <service id="swagger.analysis" class="%swagger.analysis.class%"/>
+
+        <!-- Processors -->
+        <service id="swagger.processor.merge_into_swagger" class="Swagger\Processors\MergeIntoSwagger">
+            <tag name="swagger.processor" priority="0"/>
+        </service>
+        <service id="swagger.processor.symfony" class="%swagger.processor.symfony.class%" public="false">
+            <argument>%swagger.config%</argument>
+            <tag name="swagger.processor" prioriry="10"/>
+        </service>
+        <service id="swagger.processor.route" class="%swagger.processor.route.class%" public="false">
+            <argument type="service" id="router"/>
+            <argument/>
+            <argument/>
+            <tag name="swagger.processor" prioriry="10"/>
+        </service>
+
+        <service id="swagger.processor.build_paths" class="Swagger\Processors\BuildPaths">
+            <tag name="swagger.processor" priority="20"/>
+        </service>
+        <service id="swagger.processor.augment_definitions" class="Swagger\Processors\AugmentDefinitions">
+            <tag name="swagger.processor" priority="30"/>
+        </service>
+        <service id="swagger.processor.augment_properties" class="Swagger\Processors\AugmentProperties">
+            <tag name="swagger.processor" priority="40"/>
+        </service>
+        <service id="swagger.processor.inherit_properties" class="Swagger\Processors\InheritProperties">
+            <tag name="swagger.processor" priority="50"/>
+        </service>
+        <service id="swagger.processor.augment_operations" class="Swagger\Processors\AugmentOperations">
+            <tag name="swagger.processor" priority="60"/>
+        </service>
+        <service id="swagger.processor.augment_parameters" class="Swagger\Processors\AugmentParameters">
+            <tag name="swagger.processor" priority="70"/>
+        </service>
+        <service id="swagger.processor.clean_unmerged" class="Swagger\Processors\CleanUnmerged">
+            <tag name="swagger.processor" priority="80"/>
+        </service>
+
+        <!-- Swagger Commands -->
+        <service id="swagger.command.dump" class="%swagger.command.dump.class%">
+            <argument type="service" id="swagger"/>
+            <tag name="console.command"/>
+        </service>
+        <service id="swagger.command.export" class="%swagger.command.export.class%">
+            <argument type="service" id="swagger"/>
+            <tag name="console.command"/>
+        </service>
+    </services>
+</container>
