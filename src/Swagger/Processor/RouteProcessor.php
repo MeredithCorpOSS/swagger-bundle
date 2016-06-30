@@ -32,24 +32,17 @@ class RouteProcessor
     /**
      * @var array
      */
-    private $apiFormats;
-
-    /**
-     * @var array
-     */
     private $controllerOptions;
 
     /**
      * FosRestProcessor constructor.
      *
      * @param RouterInterface $router
-     * @param array           $apiFormats
      * @param array           $controllerOptions
      */
-    public function __construct(RouterInterface $router, array $apiFormats, array $controllerOptions)
+    public function __construct(RouterInterface $router, array $controllerOptions)
     {
         $this->router = $router;
-        $this->apiFormats = $apiFormats;
         $this->controllerOptions = $controllerOptions;
     }
 
@@ -185,7 +178,6 @@ class RouteProcessor
                 $operation->summary = 'Fetch a collection of '.$options['entity_name'].' entities';
             }
         }
-        $operation->produces = $this->apiFormats;
 
         // verify that the x-collection property is set
         if ($options['returns'] == Route::RETURNS_COLLECTION) {
@@ -238,7 +230,6 @@ class RouteProcessor
         if (!$operation->summary) {
             $operation->summary = 'Create a '.$options['entity_name'].' entity';
         }
-        $operation->consumes = $this->apiFormats;
 
         if (!($operation->parameters && $this->pathParameterExists('body', $operation->parameters))) {
             $operation->parameters[] = new Parameter(
@@ -283,7 +274,6 @@ class RouteProcessor
         if (!$operation->summary) {
             $operation->summary = 'Edit a '.$options['entity_name'].' entity';
         }
-        $operation->consumes = $this->apiFormats;
 
         if (!($operation->parameters && $this->pathParameterExists('body', $operation->parameters))) {
             $operation->parameters[] = new Parameter(
@@ -340,7 +330,6 @@ class RouteProcessor
         if (!$operation->summary) {
             $operation->summary = 'Edit fields of a '.$options['entity_name'].' entity';
         }
-        $operation->consumes = $this->apiFormats;
 
         if (!($operation->parameters && $this->pathParameterExists('body', $operation->parameters))) {
             $operation->parameters[] = new Parameter(

@@ -47,10 +47,17 @@ swagger:
         title: 'My API'
         version: '1.0.0'
         description: 'My API Description'
-    formats:
+    host: 'my-api-host:8080'
+    base_path: '/v2'
+    schemes:
+        - https
+    provides:
         - application/json
-    bundles:
-        - AcmeDemoBundle
+    consumes:
+        - application/json
+    annotations:
+        bundles:
+            - AcmeDemoBundle
 ```
 
 The full [configuration reference](docs/annotation-reference.md) for a comprehensive list of all values and defaults.

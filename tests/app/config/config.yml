@@ -11,14 +11,23 @@ framework:
 
 swagger:
     version: '2.0'      # Swagger version
+    host: 'testhost'
+    base_path: '/base'
     info:
         title: 'My API' # Required
         version: '1.0'  # Required
         description: 'My API Description'
-    formats:
+    consumes:
         - application/json
         - application/test
-    bundles:
-        - TestBundle
-    paths:
-        - '%kernel.root_dir%/../src/fixtures/TestApp/Component'
+    produces:
+        - application/json
+        - application/test
+    schemes:
+        - http
+        - https
+    annotations:
+        bundles:
+            - TestBundle
+        paths:
+            - '%kernel.root_dir%/../src/fixtures/TestApp/Component'

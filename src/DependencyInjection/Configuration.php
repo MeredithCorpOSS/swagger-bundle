@@ -23,6 +23,8 @@ class Configuration implements ConfigurationInterface
         $rootNode->children()
 
                 ->scalarNode('version')->defaultValue('2.0')->end()
+                ->scalarNode('host')->end()
+                ->scalarNode('base_path')->end()
                 ->arrayNode('info')
                     ->children()
                         ->scalarNode('title')->isRequired()->end()
@@ -31,21 +33,33 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
-                ->arrayNode('formats')
-                    ->isRequired()
+                ->arrayNode('schemes')
                     ->prototype('scalar')->end()
                 ->end()
 
-                ->arrayNode('bundles')
+                ->arrayNode('consumes')
                     ->prototype('scalar')->end()
                 ->end()
 
-                ->arrayNode('paths')
+                ->arrayNode('produces')
                     ->prototype('scalar')->end()
                 ->end()
 
-                ->arrayNode('paths_exclude')
-                    ->prototype('scalar')->end()
+                ->arrayNode('annotations')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('bundles')
+                            ->prototype('scalar')->end()
+                        ->end()
+
+                        ->arrayNode('paths')
+                            ->prototype('scalar')->end()
+                        ->end()
+
+                        ->arrayNode('paths_exclude')
+                            ->prototype('scalar')->end()
+                        ->end()
+                    ->end()
                 ->end()
             ->end();
 

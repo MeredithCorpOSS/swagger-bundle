@@ -43,12 +43,12 @@ class SwaggerExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('swagger.config', $config['info']);
+        $container->setParameter('swagger.config', $config);
 
         $dirs = [];
         $bundles = $container->getParameter('kernel.bundles');
         foreach ($bundles as $bundle => $class) {
-            if (in_array($bundle, $config['bundles'])) {
+            if (in_array($bundle, $config['annotations']['bundles'])) {
                 $refl = new \ReflectionClass($class);
                 $bundleDir = dirname($refl->getFileName());
                 $checkDirs = [
@@ -68,7 +68,7 @@ class SwaggerExtension extends Extension
             }
         }
 
-        foreach ($config['paths'] as $path) {
+        foreach ($config['annotations']['paths'] as $path) {
             $dirs[] = $path;
         }
 
@@ -94,7 +94,7 @@ class SwaggerExtension extends Extension
         $routeDefinitions = [];
         $bundles = $container->getParameter('kernel.bundles');
         foreach ($bundles as $bundle => $class) {
-            if (!in_array($bundle, $config['bundles'])) {
+            if (!in_array($bundle, $config['annotations']['bundles'])) {
                 continue;
             }
             $bundleReflClass = new \ReflectionClass($class);
@@ -126,7 +126,7 @@ class SwaggerExtension extends Extension
 
         // Search paths
         $analyser = new ClassAnalyser();
-        foreach ($config['paths'] as $dir) {
+        foreach ($config['annotations']['paths'] as $dir) {
             $finder = new Finder();
             $finder->in($dir);
             $finder->name('*.php');
@@ -145,8 +145,7 @@ class SwaggerExtension extends Extension
         }
 
         $processorDefinition = $container->findDefinition('swagger.processor.route');
-        $processorDefinition->replaceArgument(1, $config['formats']);
-        $processorDefinition->replaceArgument(2, $routeDefinitions);
+        $processorDefinition->replaceArgument(1, $routeDefinitions);
     }
 
     /**
@@ -165,7 +164,7 @@ class SwaggerExtension extends Extension
                 if ($annotation instanceof Route) {
                     $annotation->controller = $controllerReflClass->getName();
                     $this->autoDetectEntity($annotation);
-                    $routeDefinitions[] = (array) $annotation;
+                    $routeDefinitions[] = (array)$annotation;
                 }
             }
 
@@ -176,7 +175,7 @@ class SwaggerExtension extends Extension
                         $annotation->controller = $controllerReflClass->getName();
                         $annotation->method = $method->getName();
                         $this->autoDetectEntity($annotation);
-                        $routeDefinitions[] = (array) $annotation;
+                        $routeDefinitions[] = (array)$annotation;
                     }
                 }
             }

@@ -54,8 +54,10 @@ class SwaggerExtensionTest extends \PHPUnit_Framework_TestCase
         $extension->load(
             $this->createConfig(
                 [
-                    'bundles' => [
-                        'TestBundle',
+                    'annotations' => [
+                        'bundles' => [
+                            'TestBundle',
+                        ],
                     ],
                 ]
             ),
@@ -91,8 +93,10 @@ class SwaggerExtensionTest extends \PHPUnit_Framework_TestCase
         $extension->load(
             $this->createConfig(
                 [
-                    'paths' => [
-                        $this->baseDir.'/src/fixtures/TestApp/Component',
+                    'annotations' => [
+                        'paths' => [
+                            $this->baseDir.'/src/fixtures/TestApp/Component',
+                        ],
                     ],
                 ]
             ),
@@ -119,8 +123,10 @@ class SwaggerExtensionTest extends \PHPUnit_Framework_TestCase
         $extension->load(
             $this->createConfig(
                 [
-                    'bundles' => [
-                        'ExceptionTestBundle',
+                    'annotations' => [
+                        'bundles' => [
+                            'ExceptionTestBundle',
+                        ],
                     ],
                 ]
             ),
@@ -140,14 +146,20 @@ class SwaggerExtensionTest extends \PHPUnit_Framework_TestCase
         $configs = [
             [
                 'version' => '2.0',
+                'host' => 'host',
+                'base_path' => '/path',
                 'info' => [
                     'title' => 'Test App',
                     'description' => 'Unit Tests',
                     'version' => '1.0',
                 ],
-                'formats' => [],
-                'bundles' => [],
-                'paths' => [],
+                'consumes' => [],
+                'produces' => [],
+                'schemes' => [],
+                'annotations' => [
+                    'bundles' => [],
+                    'paths' => [],
+                ],
             ],
         ];
 

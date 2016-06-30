@@ -106,7 +106,6 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
     public function testContstructor()
     {
         $this->router;
-        $formats = ['application/json'];
         $controllerOptions = [
             $this->createControllerOption(
                 'test_route',
@@ -117,7 +116,7 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
             ),
         ];
 
-        $processor = new RouteProcessor($this->router, $formats, $controllerOptions);
+        $processor = new RouteProcessor($this->router, $controllerOptions);
     }
 
     /**
@@ -133,7 +132,6 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
                      ->method('getRouteCollection')
                      ->willReturn($this->routeCollection);
 
-        $formats = ['application/json'];
         $controllerOptions = [];
         foreach ($routes as $type => $options) {
             list($route, $method, $returns) = $options;
@@ -146,7 +144,7 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
             );
         }
 
-        $processor = new RouteProcessor($this->router, $formats, $controllerOptions);
+        $processor = new RouteProcessor($this->router, $controllerOptions);
 
         $this->assertCount(0, $this->analysis->swagger->paths);
         $processor($this->analysis);
@@ -171,7 +169,6 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
                     } else {
                         $this->assertEquals('Fetch a collection of Food entities', $path->get->summary);
                     }
-                    $this->assertEquals($formats, $path->get->produces);
                     $this->assertCount(2, $path->get->responses);
                     /** @var Response $response */
                     foreach ($path->get->responses as $response) {
@@ -205,8 +202,6 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
 
                     $this->assertEquals('post', $path->post->method);
                     $this->assertEquals('Create a Food entity', $path->post->summary);
-                    $this->assertEquals($formats, $path->post->consumes);
-                    $this->assertNull($path->post->produces);
                     $this->assertCount(2, $path->post->responses);
                     /** @var Response $response */
                     foreach ($path->post->responses as $response) {
@@ -232,8 +227,6 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
 
                     $this->assertEquals('put', $path->put->method);
                     $this->assertEquals('Edit a Food entity', $path->put->summary);
-                    $this->assertEquals($formats, $path->put->consumes);
-                    $this->assertNull($path->put->produces);
                     $this->assertCount(4, $path->put->responses);
                     /** @var Response $response */
                     foreach ($path->put->responses as $response) {
@@ -267,8 +260,6 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
 
                     $this->assertEquals('patch', $path->patch->method);
                     $this->assertEquals('Edit fields of a Food entity', $path->patch->summary);
-                    $this->assertEquals($formats, $path->patch->consumes);
-                    $this->assertNull($path->patch->produces);
                     $this->assertCount(4, $path->patch->responses);
                     /** @var Response $response */
                     foreach ($path->patch->responses as $response) {
@@ -302,8 +293,6 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
 
                     $this->assertEquals('delete', $path->delete->method);
                     $this->assertEquals('Delete a Food entity', $path->delete->summary);
-                    $this->assertNull($path->delete->consumes);
-                    $this->assertNull($path->delete->produces);
                     $this->assertCount(3, $path->delete->responses);
                     /** @var Response $response */
                     foreach ($path->delete->responses as $response) {
@@ -338,12 +327,11 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
                      ->method('getRouteCollection')
                      ->willReturn(new RouteCollection());
 
-        $formats = ['application/json'];
         $controllerOptions = [
             $this->createControllerOption('test', 'test', 'test', 'test', 'test'),
         ];
 
-        $processor = new RouteProcessor($this->router, $formats, $controllerOptions);
+        $processor = new RouteProcessor($this->router, $controllerOptions);
 
         $processor($this->analysis);
     }

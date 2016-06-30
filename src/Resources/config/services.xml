@@ -8,7 +8,7 @@
         <parameter key="swagger.class">TimeInc\SwaggerBundle\Swagger</parameter>
         <parameter key="swagger.analyser.class">Swagger\StaticAnalyser</parameter>
         <parameter key="swagger.analysis.class">Swagger\Analysis</parameter>
-        <parameter key="swagger.processor.symfony.class">TimeInc\SwaggerBundle\Swagger\Processor\SymfonyProcessor</parameter>
+        <parameter key="swagger.processor.symfony_config.class">TimeInc\SwaggerBundle\Swagger\Processor\SymfonyConfigProcessor</parameter>
         <parameter key="swagger.processor.route.class">TimeInc\SwaggerBundle\Swagger\Processor\RouteProcessor</parameter>
         <parameter key="swagger.command.dump.class">TimeInc\SwaggerBundle\Command\DumpCommand</parameter>
         <parameter key="swagger.command.export.class">TimeInc\SwaggerBundle\Command\ExportCommand</parameter>
@@ -28,7 +28,7 @@
         <service id="swagger.processor.merge_into_swagger" class="Swagger\Processors\MergeIntoSwagger">
             <tag name="swagger.processor" priority="0"/>
         </service>
-        <service id="swagger.processor.symfony" class="%swagger.processor.symfony.class%" public="false">
+        <service id="swagger.processor.symfony_config" class="%swagger.processor.symfony_config.class%" public="false">
             <argument>%swagger.config%</argument>
             <tag name="swagger.processor" prioriry="10"/>
         </service>

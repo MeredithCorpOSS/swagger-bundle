@@ -6,11 +6,11 @@ use Swagger\Analysis;
 use Swagger\Annotations\Info;
 
 /**
- * Class SymfonyProcessor.
+ * Class SymfonyConfigProcessor.
  *
  * @author andy.thorne@timeinc.com
  */
-class SymfonyProcessor
+class SymfonyConfigProcessor
 {
     /**
      * @var array
@@ -39,8 +39,14 @@ class SymfonyProcessor
         if (!$swagger->info instanceof Info) {
             $swagger->info = new Info([]);
         }
-        $swagger->info->title = $this->config['title'];
-        $swagger->info->description = $this->config['description'];
-        $swagger->info->version = $this->config['version'];
+        $swagger->info->title = $this->config['info']['title'];
+        $swagger->info->description = $this->config['info']['description'];
+        $swagger->info->version = $this->config['info']['version'];
+
+        $swagger->host = $this->config['host'];
+        $swagger->basePath = $this->config['base_path'];
+        $swagger->produces = $this->config['produces'];
+        $swagger->consumes = $this->config['consumes'];
+        $swagger->schemes = $this->config['schemes'];
     }
 }

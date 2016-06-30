@@ -8,7 +8,13 @@ swagger:
         title: 'My API' # Required
         version: '1.0'  # Required
         description: 'My API Description'
-    formats: []         # Required - list of all content types the API accepts/produces (e.g. application/json)
-    bundles: []         # Required - list of bundles to search for annotations in
-    paths:   []         # List of any paths to include in the search for annotations
+    host: ~             # API Host
+    base_path: ~        # API base path
+    provides: []         # Default list of all content types the API provides (e.g. [application/json])
+    consumes: []         # Default list of all content types the API consumes (e.g. [application/json])
+    schemes: []          # Default list of all API Schemes (e.g. [http, https])
+    
+    annotations:
+        bundles: []         # Required - list of bundles to search for annotations in
+        paths:   []         # List of any paths to include in the search for annotations
 ```
