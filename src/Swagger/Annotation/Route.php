@@ -44,4 +44,21 @@ class Route
      * @var string
      */
     public $returns = 'entity';
+
+    /**
+     * Route constructor.
+     *
+     * @param array $data
+     */
+    public function __construct(array $data = [])
+    {
+        if(isset($data['value'])){
+            $this->route = $data['value'];
+        }
+
+        foreach($data as $key => $value){
+            $this->{$key} = $value;
+        }
+    }
+
 }

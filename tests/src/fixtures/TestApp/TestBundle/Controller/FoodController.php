@@ -34,9 +34,7 @@ class FoodController
     /**
      * @param int $id
      *
-     * @Route(
-     *     route="post_food"
-     * )
+     * @Route("post_food")
      */
     public function postFood($id)
     {
