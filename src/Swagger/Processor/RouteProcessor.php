@@ -255,7 +255,7 @@ class RouteProcessor
                 ),
                 new Response(
                     [
-                        'response' => 405,
+                        'response' => 400,
                         'description' => 'Validation Exception',
                     ]
                 ),
@@ -300,19 +300,13 @@ class RouteProcessor
                 new Response(
                     [
                         'response' => 400,
-                        'description' => 'Invalid ID',
+                        'description' => 'Validation Exception',
                     ]
                 ),
                 new Response(
                     [
                         'response' => 404,
                         'description' => 'Entity Not Found',
-                    ]
-                ),
-                new Response(
-                    [
-                        'response' => 405,
-                        'description' => 'Validation Exception',
                     ]
                 ),
             ]
@@ -356,19 +350,13 @@ class RouteProcessor
                 new Response(
                     [
                         'response' => 400,
-                        'description' => 'Invalid ID',
+                        'description' => 'Validation Exception',
                     ]
                 ),
                 new Response(
                     [
                         'response' => 404,
                         'description' => 'Entity Not Found',
-                    ]
-                ),
-                new Response(
-                    [
-                        'response' => 405,
-                        'description' => 'Validation Exception',
                     ]
                 ),
             ]
@@ -398,7 +386,7 @@ class RouteProcessor
                 new Response(
                     [
                         'response' => 400,
-                        'description' => 'Invalid ID',
+                        'description' => 'Validation Exception',
                     ]
                 ),
                 new Response(

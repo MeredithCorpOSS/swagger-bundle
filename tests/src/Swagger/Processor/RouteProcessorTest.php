@@ -210,7 +210,7 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
                                 $this->assertEquals('Entity Created', $response->description);
                                 break;
 
-                            case 405:
+                            case 400:
                                 $this->assertEquals('Validation Exception', $response->description);
                                 break;
 
@@ -227,7 +227,7 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
 
                     $this->assertEquals('put', $path->put->method);
                     $this->assertEquals('Edit a Food entity', $path->put->summary);
-                    $this->assertCount(4, $path->put->responses);
+                    $this->assertCount(3, $path->put->responses);
                     /** @var Response $response */
                     foreach ($path->put->responses as $response) {
                         switch ($response->response) {
@@ -236,15 +236,11 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
                                 break;
 
                             case 400:
-                                $this->assertEquals('Invalid ID', $response->description);
+                                $this->assertEquals('Validation Exception', $response->description);
                                 break;
 
                             case 404:
                                 $this->assertEquals('Entity Not Found', $response->description);
-                                break;
-
-                            case 405:
-                                $this->assertEquals('Validation Exception', $response->description);
                                 break;
 
                             default:
@@ -260,7 +256,7 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
 
                     $this->assertEquals('patch', $path->patch->method);
                     $this->assertEquals('Edit fields of a Food entity', $path->patch->summary);
-                    $this->assertCount(4, $path->patch->responses);
+                    $this->assertCount(3, $path->patch->responses);
                     /** @var Response $response */
                     foreach ($path->patch->responses as $response) {
                         switch ($response->response) {
@@ -269,15 +265,11 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
                                 break;
 
                             case 400:
-                                $this->assertEquals('Invalid ID', $response->description);
+                                $this->assertEquals('Validation Exception', $response->description);
                                 break;
 
                             case 404:
                                 $this->assertEquals('Entity Not Found', $response->description);
-                                break;
-
-                            case 405:
-                                $this->assertEquals('Validation Exception', $response->description);
                                 break;
 
                             default:
@@ -302,7 +294,7 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
                                 break;
 
                             case 400:
-                                $this->assertEquals('Invalid ID', $response->description);
+                                $this->assertEquals('Validation Exception', $response->description);
                                 break;
 
                             case 404:
