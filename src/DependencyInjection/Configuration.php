@@ -61,6 +61,10 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+
+                ->arrayNode('api_gateway')
+                    ->canBeEnabled()
+                ->end()
             ->end();
 
         return $treeBuilder;

@@ -58,6 +58,7 @@ swagger:
     annotations:
         bundles:
             - AcmeDemoBundle
+    api_gateway: false
 ```
 
 The full [configuration reference](docs/annotation-reference.md) for a comprehensive list of all values and defaults.
@@ -157,3 +158,7 @@ You can dump the json schema to the console with the `swagger:dump` command:
 
 > HINT: You can use python's `json.tool` module to pretty-print the output:
 > > `./bin/console -e=dev swagger:dump | python -mjson.tool`
+
+## API Gateway
+
+The bundle can also generate an API Gateway schema for your API.
