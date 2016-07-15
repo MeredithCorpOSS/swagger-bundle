@@ -23,9 +23,20 @@ class AnalysisCompilerPass implements CompilerPassInterface
 
         $processorDefinitions = [];
         foreach ($swaggerProcessors as $sId => $tags) {
-            $processorDefinitions[] = new Reference($sId);
+            foreach($tags as $tag) {
+                if(!isset($tag['priority'])){
+                    $tag['priority'] = 0;
+                }
+                $processorDefinitions[$tag['priority']][] = new Reference($sId);
+            }
+        }
+        $processorDefinitionPrioritised = [];
+        foreach($processorDefinitions as $sortedProcessorDefinitions){
+            foreach($sortedProcessorDefinitions as $sortedProcessorDefinition){
+                $processorDefinitionPrioritised[] = $sortedProcessorDefinition;
+            }
         }
 
-        $swaggerDefinition->replaceArgument(2, $processorDefinitions);
+        $swaggerDefinition->replaceArgument(2, $processorDefinitionPrioritised);
     }
 }
