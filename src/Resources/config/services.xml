@@ -25,39 +25,39 @@
         <service id="swagger.analysis" class="%swagger.analysis.class%"/>
 
         <!-- Processors -->
-        <service id="swagger.processor.merge_into_swagger" class="Swagger\Processors\MergeIntoSwagger">
+        <service id="swagger.processor.merge_into_swagger" class="Swagger\Processors\MergeIntoSwagger" public="false">
             <tag name="swagger.processor" priority="0"/>
         </service>
         <service id="swagger.processor.symfony_config" class="%swagger.processor.symfony_config.class%" public="false">
             <argument>%swagger.config%</argument>
-            <tag name="swagger.processor" prioriry="10"/>
+            <tag name="swagger.processor" priority="10"/>
         </service>
         <service id="swagger.processor.route" class="%swagger.processor.route.class%" public="false">
             <argument type="service" id="router"/>
             <argument/>
             <argument/>
-            <tag name="swagger.processor" prioriry="10"/>
+            <tag name="swagger.processor" priority="10"/>
         </service>
 
-        <service id="swagger.processor.build_paths" class="Swagger\Processors\BuildPaths">
+        <service id="swagger.processor.build_paths" class="Swagger\Processors\BuildPaths" public="false">
             <tag name="swagger.processor" priority="20"/>
         </service>
-        <service id="swagger.processor.augment_definitions" class="Swagger\Processors\AugmentDefinitions">
+        <service id="swagger.processor.augment_definitions" class="Swagger\Processors\AugmentDefinitions" public="false">
             <tag name="swagger.processor" priority="30"/>
         </service>
-        <service id="swagger.processor.augment_properties" class="Swagger\Processors\AugmentProperties">
+        <service id="swagger.processor.augment_properties" class="Swagger\Processors\AugmentProperties" public="false">
             <tag name="swagger.processor" priority="40"/>
         </service>
-        <service id="swagger.processor.inherit_properties" class="Swagger\Processors\InheritProperties">
+        <service id="swagger.processor.inherit_properties" class="Swagger\Processors\InheritProperties" public="false">
             <tag name="swagger.processor" priority="50"/>
         </service>
-        <service id="swagger.processor.augment_operations" class="Swagger\Processors\AugmentOperations">
+        <service id="swagger.processor.augment_operations" class="Swagger\Processors\AugmentOperations" public="false">
             <tag name="swagger.processor" priority="60"/>
         </service>
-        <service id="swagger.processor.augment_parameters" class="Swagger\Processors\AugmentParameters">
+        <service id="swagger.processor.augment_parameters" class="Swagger\Processors\AugmentParameters" public="false">
             <tag name="swagger.processor" priority="70"/>
         </service>
-        <service id="swagger.processor.clean_unmerged" class="Swagger\Processors\CleanUnmerged">
+        <service id="swagger.processor.clean_unmerged" class="Swagger\Processors\CleanUnmerged" public="false">
             <tag name="swagger.processor" priority="80"/>
         </service>
 

@@ -3,6 +3,7 @@
 namespace TimeInc\SwaggerBundle\Swagger\Processor;
 
 use Swagger\Analysis;
+use Swagger\Annotations\Header;
 use Swagger\Annotations\Operation;
 use Swagger\Annotations\Parameter;
 use Swagger\Annotations\Path;
@@ -67,7 +68,7 @@ class ApiGatewayProcessor
         // check if there is a global security option
         if ($swagger->security) {
             foreach ($swagger->security as $securityOptions) {
-                foreach($securityParameters as $securityParameter => $securityDefinition) {
+                foreach ($securityParameters as $securityParameter => $securityDefinition) {
                     if (isset($securityOptions[$securityParameter])) {
                         $globalSecurityParameters[$securityParameter] = $securityDefinition;
                         unset($securityParameters[$securityParameter]);
@@ -87,10 +88,10 @@ class ApiGatewayProcessor
                 $operation = $path->{$operationKey};
                 if ($operation instanceof Operation) {
 
-                    if($pathParameters) {
+                    if ($pathParameters) {
                         foreach ($pathParameters as $pathParameter) {
                             $add = true;
-                            if($operation->parameters) {
+                            if ($operation->parameters) {
                                 foreach ($operation->parameters as $opParameter) {
                                     if ($opParameter->parameter == $pathParameter->parameter) {
                                         $add = false;
@@ -105,13 +106,13 @@ class ApiGatewayProcessor
                     }
 
                     // add global security parameters to each method
-                    foreach($globalSecurityParameters as $globalSecurityParameterKey => $globalSecurityParameter){
+                    foreach ($globalSecurityParameters as $globalSecurityParameterKey => $globalSecurityParameter) {
                         $operation->parameters[] = $globalSecurityParameter;
                     }
 
-                    if($operation->security){
-                        foreach($operation->security as $securityKey => $securityOptions){
-                            if(isset($securityParameters[$securityKey])){
+                    if ($operation->security) {
+                        foreach ($operation->security as $securityKey => $securityOptions) {
+                            if (isset($securityParameters[$securityKey])) {
                                 $operation->parameters[] = $securityParameters[$securityKey];
                             }
                         }
@@ -132,10 +133,11 @@ class ApiGatewayProcessor
             'httpMethod' => strtoupper($operation->method),
             'responses' => [],
             'requestParameters' => [],
+            'responseParameters' => [],
         ];
 
         $defaultCode = 200;
-        switch($operation->method){
+        switch ($operation->method) {
             case 'get':
                 $defaultCode = 200;
                 break;
@@ -159,7 +161,15 @@ class ApiGatewayProcessor
             }
             $config['responses'][$code] = [
                 'statusCode' => $response->response,
+                'responseParameters' => [],
             ];
+
+            if ($response->headers) {
+                $methodParameters = $this->createIntegrationParameters($response->headers, false);
+                foreach ($methodParameters as $methodParameterKey => $methodParameterValue) {
+                    $config['responses'][$code]['responseParameters'][$methodParameterKey] = $methodParameterValue;
+                }
+            }
         }
 
         if ($operation->parameters) {
@@ -169,7 +179,7 @@ class ApiGatewayProcessor
             }
         }
 
-        if(!count($config['requestParameters'])){
+        if (!count($config['requestParameters'])) {
             unset($config['requestParameters']);
         }
 
@@ -178,32 +188,49 @@ class ApiGatewayProcessor
 
     /**
      * @param Parameter[] $parameters
+     * @param bool        $request If true (default), will generate a parameter for the request. false is response.
      *
      * @return array
      */
-    protected function createIntegrationParameters(array $parameters)
+    protected function createIntegrationParameters(array $parameters, $request = true)
     {
         $requestParameters = [];
 
         foreach ($parameters as $parameter) {
-            $name = $parameter->name;
-            $type = null;
-            switch ($parameter->in) {
-                case 'query':
-                    $type = 'querystring';
+            $type = $name = null;
+
+            switch (true) {
+                case ($parameter instanceof Parameter):
+                    $name = $parameter->name;
+
+                    switch ($parameter->in) {
+                        case 'query':
+                            $type = 'querystring';
+                            break;
+                        case 'header':
+                        case 'path':
+                            $type = $parameter->in;
+                            break;
+                        case 'body':
+                        default:
+                            break;
+                    }
+
                     break;
-                case 'header':
-                case 'path':
-                    $type = $parameter->in;
-                    break;
-                case 'body':
-                default:
+                case ($parameter instanceof Header):
+                    $name = $parameter->header;
+                    $type = 'header';
                     break;
             }
 
-            if($type) {
-                $requestParameters['integration.request.'.$type.'.'.$name] = 'method.request.'.$type.'.'.$name;
+            if ($type && $name) {
+                $httpResponse = $request ? 'request' : 'response';
+                $requestParameters['integration.'.$httpResponse.'.'.$type.'.'.$name] = 'method.'.$httpResponse.'.'.$type.'.'.$name;
             }
+        }
+
+        if (!$request) {
+            $requestParameters = array_flip($requestParameters);
         }
 
         return $requestParameters;

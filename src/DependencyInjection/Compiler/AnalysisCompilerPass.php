@@ -30,6 +30,7 @@ class AnalysisCompilerPass implements CompilerPassInterface
                 $processorDefinitions[$tag['priority']][] = new Reference($sId);
             }
         }
+        ksort($processorDefinitions);
         $processorDefinitionPrioritised = [];
         foreach($processorDefinitions as $sortedProcessorDefinitions){
             foreach($sortedProcessorDefinitions as $sortedProcessorDefinition){

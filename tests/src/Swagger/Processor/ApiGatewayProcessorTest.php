@@ -5,6 +5,7 @@ namespace TimeInc\SwaggerBundle\Tests\Swagger\Processor;
 use Swagger\Analysis;
 use Swagger\Annotations\Delete;
 use Swagger\Annotations\Get;
+use Swagger\Annotations\Header;
 use Swagger\Annotations\Parameter;
 use Swagger\Annotations\Patch;
 use Swagger\Annotations\Path;
@@ -126,6 +127,14 @@ class ApiGatewayProcessorTest extends \PHPUnit_Framework_TestCase
                                 new Response(
                                     [
                                         'response' => 200,
+                                        'headers' => [
+                                            new Header(
+                                                [
+                                                    'header' => 'X-EXAMPLE',
+                                                    'type' => 'string',
+                                                ]
+                                            ),
+                                        ],
                                     ]
                                 ),
                                 new Response(
@@ -156,6 +165,17 @@ class ApiGatewayProcessorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $integration['responses']);
         $this->assertArrayHasKey('default', $integration['responses']);
         $this->assertArrayHasKey(404, $integration['responses']);
+
+        $this->assertArrayHasKey('responseParameters', $integration['responses']['default']);
+        $this->assertArrayHasKey(
+            'method.response.header.X-EXAMPLE',
+            $integration['responses']['default']['responseParameters']
+        );
+        $this->assertEquals(
+            'integration.response.header.X-EXAMPLE',
+            $integration['responses']['default']['responseParameters']['method.response.header.X-EXAMPLE']
+        );
+
         $this->assertArrayNotHasKey('requestParameters', $integration);
     }
 
@@ -231,11 +251,14 @@ class ApiGatewayProcessorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('GET', $integration['httpMethod']);
         $this->assertArrayHasKey('requestParameters', $integration);
         $this->assertCount(3, $integration['requestParameters']);
-        $this->assertSame([
-            'integration.request.path.entity' => 'method.request.path.entity',
-            'integration.request.path.id' => 'method.request.path.id',
-            'integration.request.querystring.query' => 'method.request.querystring.query',
-        ], $integration['requestParameters']);
+        $this->assertSame(
+            [
+                'integration.request.path.entity' => 'method.request.path.entity',
+                'integration.request.path.id' => 'method.request.path.id',
+                'integration.request.querystring.query' => 'method.request.querystring.query',
+            ],
+            $integration['requestParameters']
+        );
         $this->assertNull($swagger->paths[0]->parameters);
     }
 

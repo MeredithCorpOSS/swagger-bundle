@@ -1,0 +1,34 @@
+framework:
+    test: ~
+    secret: test
+    session:
+        storage_id: session.storage.mock_file
+    profiler:
+        collect: false
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+
+swagger:
+    version: '2.0'      # Swagger version
+    host: 'testhost'
+    base_path: '/base'
+    info:
+        title: 'My API' # Required
+        version: '1.0'  # Required
+        description: 'My API Description'
+    consumes:
+        - application/json
+        - application/test
+    produces:
+        - application/json
+        - application/test
+    schemes:
+        - http
+        - https
+    annotations:
+        bundles:
+            - TestBundle
+        paths:
+            - '%kernel.root_dir%/../src/fixtures/TestApp/Component'
+    api_gateway: true
