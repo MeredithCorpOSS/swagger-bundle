@@ -133,7 +133,6 @@ class ApiGatewayProcessor
             'httpMethod' => strtoupper($operation->method),
             'responses' => [],
             'requestParameters' => [],
-            'responseParameters' => [],
         ];
 
         $defaultCode = 200;
@@ -161,7 +160,6 @@ class ApiGatewayProcessor
             }
             $config['responses'][$code] = [
                 'statusCode' => $response->response,
-                'responseParameters' => [],
             ];
 
             if ($response->headers) {

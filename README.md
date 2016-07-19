@@ -161,4 +161,21 @@ You can dump the json schema to the console with the `swagger:dump` command:
 
 ## API Gateway
 
-The bundle can also generate an API Gateway schema for your API.
+The bundle can also generate a swagger schema for an 
+[AWS API Gateway](https://aws.amazon.com/api-gateway/) using the HTTP 
+Proxy.
+
+The schema can then be imported into the AWS console to generate a 1-1 
+route mapping over a HTTP proxy for your API. All parameters and headers
+and imported into AWS and passed through.
+
+### Enable API Gateway
+
+To enable the API Gateway schema, enable the `swagger.api_gateway` 
+option in your `app/config/config_dev.yml`:
+
+```yml
+swagger:
+    # ... 
+    api_gateway: true    
+```
