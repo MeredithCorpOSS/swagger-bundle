@@ -173,11 +173,13 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
                     /** @var Response $response */
                     if ($returns == Route::RETURNS_COLLECTION) {
                         $hasQueryParam = false;
-                        foreach ($path->parameters ?? [] as $parameter){
-                            if($parameter->parameter == 'name'){
-                                $this->assertEquals('query', $parameter->in);
-                                $this->assertEquals('test', $parameter->default);
-                                $hasQueryParam = true;
+                        if($path->parameters) {
+                            foreach ($path->parameters as $parameter) {
+                                if ($parameter->parameter == 'name') {
+                                    $this->assertEquals('query', $parameter->in);
+                                    $this->assertEquals('test', $parameter->default);
+                                    $hasQueryParam = true;
+                                }
                             }
                         }
                         if(!$hasQueryParam){
