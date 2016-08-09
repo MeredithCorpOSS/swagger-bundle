@@ -12,7 +12,6 @@ use Swagger\Annotations\Path;
 use Swagger\Annotations\Post;
 use Swagger\Annotations\Put;
 use Swagger\Annotations\Response;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 use TimeInc\SwaggerBundle\Exception\SwaggerException;
 use TimeInc\SwaggerBundle\Swagger\Annotation\Route;
@@ -97,11 +96,12 @@ class RouteProcessor
 
             foreach ($compiledRoute->getPathVariables() as $routeVariable) {
                 // don't add the parameter if it's already defined
-                if ($path->parameters && $this->pathParameterExists($routeVariable, $path->parameters)) {
+                if (isset($path->parameters[$routeVariable])) {
                     break;
                 }
                 $parameter = new Parameter(
                     [
+                        'parameter' => $routeVariable,
                         'name' => $routeVariable,
                         'type' => 'string',
                         'in' => 'path',
@@ -121,7 +121,31 @@ class RouteProcessor
                         break;
                     }
                 }
-                $path->parameters[] = $parameter;
+                $path->parameters[$routeVariable] = $parameter;
+            }
+
+            // query parameters
+            foreach ($route->getDefaults() as $defaultKey => $defaultValue) {
+
+                // ignore prefixed _ vars
+                if (strpos($defaultKey, '_') === 0) {
+                    continue;
+                }
+
+                if (isset($path->parameters[$defaultKey])) {
+                    $path->parameters[$defaultKey]->default = $defaultValue;
+                } else {
+                    $parameter = new Parameter(
+                        [
+                            'parameter' => $defaultKey,
+                            'name' => $defaultKey,
+                            'type' => $defaultValue ? gettype($defaultValue) : 'string',
+                            'in' => 'query',
+                            'default' => $defaultValue,
+                        ]
+                    );
+                    $path->parameters[$defaultKey] = $parameter;
+                }
             }
 
             foreach ($route->getMethods() as $method) {
@@ -231,9 +255,10 @@ class RouteProcessor
             $operation->summary = 'Create a '.$options['entity_name'].' entity';
         }
 
-        if (!($operation->parameters && $this->pathParameterExists('body', $operation->parameters))) {
+        if (!isset($operation->parameters['body'])) {
             $operation->parameters[] = new Parameter(
                 [
+                    'parameter' => 'body',
                     'in' => 'body',
                     'name' => 'body',
                     'required' => true,
@@ -275,9 +300,10 @@ class RouteProcessor
             $operation->summary = 'Edit a '.$options['entity_name'].' entity';
         }
 
-        if (!($operation->parameters && $this->pathParameterExists('body', $operation->parameters))) {
+        if (!isset($operation->parameters['body'])) {
             $operation->parameters[] = new Parameter(
                 [
+                    'parameter' => 'body',
                     'in' => 'body',
                     'name' => 'body',
                     'required' => true,
@@ -325,9 +351,10 @@ class RouteProcessor
             $operation->summary = 'Edit fields of a '.$options['entity_name'].' entity';
         }
 
-        if (!($operation->parameters && $this->pathParameterExists('body', $operation->parameters))) {
+        if (!isset($operation->parameters['body'])) {
             $operation->parameters[] = new Parameter(
                 [
+                    'parameter' => 'body',
                     'in' => 'body',
                     'name' => 'body',
                     'required' => true,
@@ -397,27 +424,6 @@ class RouteProcessor
                 ),
             ]
         );
-    }
-
-    /**
-     * Check if a parameter key exists.
-     *
-     * @param string      $key
-     * @param Parameter[] $parameters
-     *
-     * @return bool
-     */
-    private function pathParameterExists($key, array $parameters)
-    {
-        $key = strtolower($key);
-
-        foreach ($parameters as $parameter) {
-            if ($key === strtolower($parameter->name)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**

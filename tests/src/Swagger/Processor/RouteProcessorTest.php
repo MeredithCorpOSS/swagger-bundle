@@ -53,8 +53,8 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
                              ->getMock();
 
         $this->routeCollection = new RouteCollection();
-        $this->routeCollection->add('get_foods', new SymfonyRoute('/foods', [], [], [], '', [], ['GET']));
-        $this->routeCollection->add('get_food', new SymfonyRoute('/food/{id}', [], [], [], '', [], ['GET']));
+        $this->routeCollection->add('get_foods', new SymfonyRoute('/foods', ['name' => null], [], [], '', [], ['GET']));
+        $this->routeCollection->add('get_food', new SymfonyRoute('/food/{id}', ['id' => 1], [], [], '', [], ['GET']));
         $this->routeCollection->add('post_food', new SymfonyRoute('/food', [], [], [], '', [], ['POST']));
         $this->routeCollection->add('put_food', new SymfonyRoute('/food/{id}', [], [], [], '', [], ['PUT']));
         $this->routeCollection->add('patch_food', new SymfonyRoute('/food/{id}', [], [], [], '', [], ['PATCH']));
