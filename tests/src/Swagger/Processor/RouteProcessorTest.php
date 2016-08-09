@@ -53,7 +53,7 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
                              ->getMock();
 
         $this->routeCollection = new RouteCollection();
-        $this->routeCollection->add('get_foods', new SymfonyRoute('/foods', ['name' => null], [], [], '', [], ['GET']));
+        $this->routeCollection->add('get_foods', new SymfonyRoute('/foods', ['name' => 'test'], [], [], '', [], ['GET']));
         $this->routeCollection->add('get_food', new SymfonyRoute('/food/{id}', ['id' => 1], [], [], '', [], ['GET']));
         $this->routeCollection->add('post_food', new SymfonyRoute('/food', [], [], [], '', [], ['POST']));
         $this->routeCollection->add('put_food', new SymfonyRoute('/food/{id}', [], [], [], '', [], ['PUT']));
@@ -68,10 +68,10 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                ['get' => ['get_foods', 'getFoods', Route::RETURNS_ENTITY]],
+                ['get' => ['get_foods', 'getFoods', Route::RETURNS_COLLECTION]],
             ],
             [
-                ['get' => ['get_food', 'getFood', Route::RETURNS_COLLECTION]],
+                ['get' => ['get_food', 'getFood', Route::RETURNS_ENTITY]],
             ],
             [
                 ['get' => ['get_food', 'getFood', Route::RETURNS_ENTITY]],
@@ -103,7 +103,7 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test the processor can be constructed.
      */
-    public function testContstructor()
+    public function testConstructor()
     {
         $this->router;
         $controllerOptions = [
@@ -171,6 +171,19 @@ class RouteProcessorTest extends \PHPUnit_Framework_TestCase
                     }
                     $this->assertCount(2, $path->get->responses);
                     /** @var Response $response */
+                    if ($returns == Route::RETURNS_COLLECTION) {
+                        $hasQueryParam = false;
+                        foreach ($path->parameters ?? [] as $parameter){
+                            if($parameter->parameter == 'name'){
+                                $this->assertEquals('query', $parameter->in);
+                                $this->assertEquals('test', $parameter->default);
+                                $hasQueryParam = true;
+                            }
+                        }
+                        if(!$hasQueryParam){
+                            $this->fail('Parameters for GET did not include query "name"');
+                        }
+                    }
                     foreach ($path->get->responses as $response) {
                         switch ($response->response) {
                             case 200:
