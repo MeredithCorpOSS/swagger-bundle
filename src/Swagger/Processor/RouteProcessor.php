@@ -132,9 +132,7 @@ class RouteProcessor
                     continue;
                 }
 
-                if (isset($path->parameters[$defaultKey])) {
-                    $path->parameters[$defaultKey]->default = $defaultValue;
-                } else {
+                if (!isset($path->parameters[$defaultKey])) {
                     $parameter = new Parameter(
                         [
                             'parameter' => $defaultKey,
@@ -145,6 +143,36 @@ class RouteProcessor
                         ]
                     );
                     $path->parameters[$defaultKey] = $parameter;
+                }
+            }
+
+            // add annotation query params
+            foreach ($options['queryParams'] as $queryKey => $queryDataType) {
+                if (!isset($path->parameters[$queryKey])) {
+                    $parameter = new Parameter(
+                        [
+                            'parameter' => $queryKey,
+                            'name' => $queryKey,
+                            'type' => $queryDataType,
+                            'in' => 'query',
+                        ]
+                    );
+                    $path->parameters[$queryKey] = $parameter;
+                }
+            }
+
+            // add annotation headers
+            foreach ($options['headers'] as $headerKey => $headerDataType) {
+                if (!isset($path->parameters[$headerKey])) {
+                    $parameter = new Parameter(
+                        [
+                            'parameter' => $headerKey,
+                            'name' => $headerKey,
+                            'type' => $headerDataType,
+                            'in' => 'header',
+                        ]
+                    );
+                    $path->parameters[$headerKey] = $parameter;
                 }
             }
 
