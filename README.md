@@ -61,7 +61,7 @@ swagger:
     api_gateway: false
 ```
 
-The full [configuration reference](docs/annotation-reference.md) for a comprehensive list of all values and defaults.
+The full [configuration reference](docs/configuration-reference.md) for a comprehensive list of all values and defaults.
 
 ### Routing
 
@@ -95,16 +95,19 @@ for details about swagger-php's syntax.
 ### Symfony Routes
 
 This bundle comes with an extra `\TimeInc\SwaggerBundle\Swagger\Annotation\Route` annotation that allows you to define
-a symfony route as a swagger endpoint.
+a symfony route as a swagger endpoint. using the annotation will set a swagger path for each method and add parameters
+for the path variables and any defaults as query strings.
 
 The annotation can be defined on a class or a method with the following properies:
 
-| Property | Context       | Default | Notes |
-|----------|---------------|---------|-------|
-| method   | CLASS         |         | The method name to inspect   |
-| route    | CLASS\|METHOD |         | The Symfony route to inspect |
-| returns  | CLASS\|METHOD | entity  | The response data type (collection\|entity) |
-| entity   | CLASS\|METHOD |         | The entity that is returned. If omitted, will be guessed based on controller name |
+| Property    | Context       | Default | Notes |
+|-------------|---------------|---------|-------|
+| method      | CLASS         |         | The method name to inspect   |
+| route       | CLASS\|METHOD |         | The Symfony route to inspect |
+| returns     | CLASS\|METHOD | entity  | The response data type (collection\|entity) |
+| entity      | CLASS\|METHOD |         | The entity that is returned. If omitted, will be guessed based on controller name |
+| queryParams | CLASS\|METHOD | []      | Any extra query parameters as Key/Value array of queryParameter/dataType |
+| headers     | CLASS\|METHOD | []      | Any extra header parameters as Key/Value array of headerName/dataType |
 
 > NOTE: If the entity is omitted, the bundle will search for an entity name of the same name as the controller in the 
   same bundle. For Example, the below example controller is `Acme\PetBundle\Controller\PetController`, so the bundle
@@ -140,7 +143,9 @@ class PetController
     /**
      * @Route(
      *     route="api_get_pet_owner",
-     *     entity="Acme\PetBundle\Entity\Owner"
+     *     entity="Acme\PetBundle\Entity\Owner",
+     *     headers={"X-TEST": "string"},
+     *     queryParams={"query": "string", "page": "integer"}
      * )
      */
     public function getOwnerAction()

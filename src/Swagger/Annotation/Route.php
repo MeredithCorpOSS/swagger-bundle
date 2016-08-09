@@ -41,6 +41,16 @@ class Route
     public $entity_name;
 
     /**
+     * @var array
+     */
+    public $queryParams = [];
+
+    /**
+     * @var array
+     */
+    public $headers = [];
+
+    /**
      * @var string
      */
     public $returns = 'entity';
