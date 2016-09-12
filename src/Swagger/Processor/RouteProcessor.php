@@ -156,7 +156,9 @@ class RouteProcessor
                         'in' => 'query',
                     ];
                     if ($queryDataType == 'array') {
-                        $parameterData['items'] = 'string';
+                        $parameterData['items'] = [
+                            'type' => 'string'
+                        ];
                     }
                     $parameter = new Parameter($parameterData);
                     $path->parameters[$queryKey] = $parameter;
