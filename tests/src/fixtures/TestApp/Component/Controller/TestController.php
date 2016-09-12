@@ -12,7 +12,12 @@ use TimeInc\SwaggerBundle\Swagger\Annotation\Route;
  * @Route(
  *     method="testAction",
  *     route="test_wine",
- *     entity="TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Entity\Wine"
+ *     entity="TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Entity\Wine",
+ *     queryParams={
+ *          "test_string": "string",
+ *          "test_array": "array",
+ *          "test_integer": "integer"
+ *     }
  * )
  */
 class TestController

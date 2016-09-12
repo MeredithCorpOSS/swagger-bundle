@@ -149,14 +149,16 @@ class RouteProcessor
             // add annotation query params
             foreach ($options['queryParams'] as $queryKey => $queryDataType) {
                 if (!isset($path->parameters[$queryKey])) {
-                    $parameter = new Parameter(
-                        [
-                            'parameter' => $queryKey,
-                            'name' => $queryKey,
-                            'type' => $queryDataType,
-                            'in' => 'query',
-                        ]
-                    );
+                    $parameterData = [
+                        'parameter' => $queryKey,
+                        'name' => $queryKey,
+                        'type' => $queryDataType,
+                        'in' => 'query',
+                    ];
+                    if ($queryDataType == 'array') {
+                        $parameterData['items'] = 'string';
+                    }
+                    $parameter = new Parameter($parameterData);
                     $path->parameters[$queryKey] = $parameter;
                 }
             }
