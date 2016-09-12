@@ -51,7 +51,7 @@ swagger:
     base_path: '/v2'
     schemes:
         - https
-    provides:
+    produces:
         - application/json
     consumes:
         - application/json
