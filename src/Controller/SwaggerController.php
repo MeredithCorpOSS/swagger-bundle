@@ -3,7 +3,7 @@
 namespace TimeInc\SwaggerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class SwaggerController extends Controller
 {
@@ -11,6 +11,6 @@ class SwaggerController extends Controller
     {
         $swagger = $this->get('swagger');
 
-        return new JsonResponse($swagger->json(), 200, [], true);
+        return new Response($swagger->json(), 200, ['Content-Type' => 'application/json']);
     }
 }
