@@ -15,7 +15,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use TimeInc\SwaggerBundle\Analyser\ClassAnalyser;
 use TimeInc\SwaggerBundle\Exception\SwaggerException;
 use TimeInc\SwaggerBundle\Swagger\Annotation\Route;
-use TimeInc\SwaggerBundle\Swagger\Processor\ApiGatewayProcessor;
 
 /**
  * This is the class that loads and manages your bundle configuration.
@@ -81,11 +80,6 @@ class SwaggerExtension extends Extension
         $swaggerDefinition = $container->findDefinition('swagger');
         $swaggerDefinition->replaceArgument(2, []);
         $swaggerDefinition->replaceArgument(3, $dirs);
-
-        if ($config['api_gateway']['enabled']) {
-            $apiGatewayProcessor = $container->register('swagger.processor.api_gateway', ApiGatewayProcessor::class);
-            $apiGatewayProcessor->addTag('swagger.processor', ['priority' => 100]);
-        }
     }
 
     private function loadRouteProcessor(ContainerBuilder $container, array $config)
