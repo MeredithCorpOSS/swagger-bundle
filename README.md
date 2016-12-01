@@ -174,13 +174,6 @@ The schema can then be imported into the AWS console to generate a 1-1
 route mapping over a HTTP proxy for your API. All parameters and headers
 and imported into AWS and passed through.
 
-### Enable API Gateway
+### API Gateway
 
-To enable the API Gateway schema, enable the `swagger.api_gateway` 
-option in your `app/config/config_dev.yml`:
-
-```yml
-swagger:
-    # ... 
-    api_gateway: true    
-```
+Please [see the docs](docs/api-gateway.md) on how to integrate your API with API Gateway.
