@@ -12,13 +12,11 @@ cache:
     - $HOME/.composer
 
 env:
-  - SYMFONY_VERSION=""    # Always test latest version
-
-  # Test maintained releases
-  - SYMFONY_VERSION=2.7.*
-  - SYMFONY_VERSION=2.8.*
-  - SYMFONY_VERSION=3.0.*
+  - SYMFONY_VERSION=3.2.*
   - SYMFONY_VERSION=3.1.*
+  - SYMFONY_VERSION=3.0.*
+  - SYMFONY_VERSION=2.8.*
+  - SYMFONY_VERSION=2.7.*
 
 matrix:
   fast_finish: true
@@ -30,4 +28,4 @@ before_install:
 install:
     - composer install
 
-script: ./vendonr/bin/phpunit
+script: php vendor/bin/phpunit
