@@ -1,6 +1,6 @@
 # SwaggerBundle
 
-[![Build Status](https://travis-ci.org/TimeIncOSS/swagger-bundle.svg?branch=master)](https://travis-ci.org/TimeIncOSS/swagger-bundle)
+[![Travis](https://img.shields.io/travis/TimeIncOSS/swagger-bundle.svg?style=flat-square)](https://travis-ci.org/TimeIncOSS/swagger-bundle)
 [![Packagist](https://img.shields.io/packagist/dt/timeinc/swagger-bundle.svg?style=flat-square)](https://packagist.org/packages/timeinc/swagger-bundle)
 
 This bundle provides integration of [swagger-php](https://github.com/zircote/swagger-php) in [Symfony](https://symfony.com/).
