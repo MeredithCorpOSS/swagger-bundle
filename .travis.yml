@@ -3,6 +3,59 @@ php:
   - '5.5'
   - '5.6'
   - '7.0'
+  - '7.1'
+
+env:
+  global:
+    - SYMFONY_VERSION=""
+
+# Heavy matrix to test every version of the bundle/package
+matrix:
+  fast_finish: true
+  include:
+    - php: 5.5
+      env: SYMFONY_VERSION="2.3.x"
+    - php: 5.5
+      env: SYMFONY_VERSION="2.7.x"
+    - php: 5.5
+      env: SYMFONY_VERSION="2.8.x"
+    - php: 5.5
+      env: SYMFONY_VERSION="3.0.x"
+    - php: 5.5
+      env: SYMFONY_VERSION="3.1.x"
+    - php: 5.5
+      env: SYMFONY_VERSION="3.2.x"
+
+    - php: 5.6
+      env: SYMFONY_VERSION="2.3.x"
+    - php: 5.6
+      env: SYMFONY_VERSION="2.7.x"
+    - php: 5.6
+      env: SYMFONY_VERSION="2.8.x"
+    - php: 5.6
+      env: SYMFONY_VERSION="3.0.x"
+    - php: 5.6
+      env: SYMFONY_VERSION="3.1.x"
+    - php: 5.6
+      env: SYMFONY_VERSION="3.2.x"
+
+    - php: 7.0
+      env: SYMFONY_VERSION="3.0.x"
+    - php: 7.0
+      env: SYMFONY_VERSION="3.1.x"
+    - php: 7.0
+      env: SYMFONY_VERSION="3.2.x"
+
+    - php: 7.1
+      env: SYMFONY_VERSION="3.0.x"
+    - php: 7.1
+      env: SYMFONY_VERSION="3.1.x"
+    - php: 7.1
+      env: SYMFONY_VERSION="3.2.x"
+
+before_install:
+  - composer selfupdate
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --dev --no-update symfony/symfony:$SYMFONY_VERSION; fi
 
 install:
     - composer install
