@@ -11,7 +11,7 @@
     ],
     "require": {
         "zircote/swagger-php": "~2.0",
-        "symfony/symfony": "^2.3|^3.0"
+        "symfony/symfony": "^2.7|^3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8|^5.7"
