@@ -5,49 +5,22 @@ php:
   - '7.0'
   - '7.1'
 
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer
+
 env:
-  global:
-    - SYMFONY_VERSION=""
+  - SYMFONY_VERSION=2.7.*
+  - SYMFONY_VERSION=2.8.*
+  - SYMFONY_VERSION=3.0.*
+  - SYMFONY_VERSION=3.1.*
+  - SYMFONY_VERSION=3.2.*
 
 # Heavy matrix to test every version of the bundle/package
 matrix:
   fast_finish: true
-  include:
-    - php: 5.5
-      env: SYMFONY_VERSION="2.7.x"
-    - php: 5.5
-      env: SYMFONY_VERSION="2.8.x"
-    - php: 5.5
-      env: SYMFONY_VERSION="3.0.x"
-    - php: 5.5
-      env: SYMFONY_VERSION="3.1.x"
-
-    - php: 5.6
-      env: SYMFONY_VERSION="2.7.x"
-    - php: 5.6
-      env: SYMFONY_VERSION="2.8.x"
-    - php: 5.6
-      env: SYMFONY_VERSION="3.0.x"
-    - php: 5.6
-      env: SYMFONY_VERSION="3.1.x"
-
-    - php: 7.0
-      env: SYMFONY_VERSION="2.7.x"
-    - php: 7.0
-      env: SYMFONY_VERSION="2.8.x"
-    - php: 7.0
-      env: SYMFONY_VERSION="3.0.x"
-    - php: 7.0
-      env: SYMFONY_VERSION="3.1.x"
-
-    - php: 7.1
-      env: SYMFONY_VERSION="2.7.x"
-    - php: 7.1
-      env: SYMFONY_VERSION="2.8.x"
-    - php: 7.1
-      env: SYMFONY_VERSION="3.0.x"
-    - php: 7.1
-      env: SYMFONY_VERSION="3.1.x"
 
 before_install:
   - composer selfupdate
