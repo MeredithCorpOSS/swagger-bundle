@@ -52,6 +52,8 @@ swagger:
     base_path: '/v2'
     schemes:
         - https
+    alternative_hosts:
+        - { name: 'production', host: 'productionhost', schemes: [https], base_path: '/api' }
     produces:
         - application/json
     consumes:
@@ -59,14 +61,14 @@ swagger:
     annotations:
         bundles:
             - AcmeDemoBundle
-    api_gateway: false
+    pretty: true
 ```
 
 The full [configuration reference](docs/configuration-reference.md) for a comprehensive list of all values and defaults.
 
 ### Routing
 
-The bundle comes with a single route to view the `swagger.json` schema. To enable it, add the following to your 
+The bundle comes with routes to view the default `swagger.json` schema or schemas with overridden host, schemes and base_path as defined by your presets. To enable the routes, add the following to your 
 `./app/config/routing_dev.yml`:
 
 ```yaml
@@ -75,7 +77,7 @@ _swagger:
     prefix:   /
 ```
 
-You can then access your schema through `/_swagger/swagger.json`. As noted before, this should not be added to the 
+You can then access your default schema through `/_swagger/swagger.json` or your alternative schemas through `/_swagger/swagger-{alternative-host-name}.json`. As noted before, this should not be added to the 
 production routes.
 
 ## Usage
@@ -159,11 +161,10 @@ class PetController
 You can dump the json schema to the console with the `swagger:dump` command:
 
 ```bash
-./bin/console -e=dev swagger:dump
+./bin/console -e=dev swagger:dump --pretty
 ```
 
-> HINT: You can use python's `json.tool` module to pretty-print the output:
-> > `./bin/console -e=dev swagger:dump | python -mjson.tool`
+> HINT: You can use the option `--alternative-host=product` to override host, schemes and base_path with your production preset
 
 ## API Gateway
 

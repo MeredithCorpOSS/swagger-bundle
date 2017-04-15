@@ -31,6 +31,8 @@ class SymfonyConfigProcessor
      * Inject the OpenAPI schema as defined in the config.yml.
      *
      * @param Analysis $analysis
+     *
+     * @throws \InvalidArgumentException
      */
     public function __invoke(Analysis $analysis)
     {
@@ -45,8 +47,41 @@ class SymfonyConfigProcessor
 
         $swagger->host = $this->config['host'];
         $swagger->basePath = $this->config['base_path'];
+        $swagger->schemes = $this->config['schemes'];
+
+        if ($analysis->alternativeHost !== null) {
+            // override data with alternative host data
+            $alternativeHost = [];
+
+            if (isset($this->config['alternative_hosts'])) {
+                foreach ($this->config['alternative_hosts'] as $alternativeHostConfig) {
+                    if ($alternativeHostConfig['name'] === $analysis->alternativeHost) {
+                        $alternativeHost = $alternativeHostConfig;
+                        break;
+                    }
+                }
+            }
+
+            if (empty($alternativeHost)) {
+                throw new \InvalidArgumentException(
+                    sprintf('Unknown alternative host [%s].', $analysis->alternativeHost)
+                );
+            }
+
+            if(isset($alternativeHost['host'])) {
+                $swagger->host = $alternativeHost['host'];
+            }
+
+            if(isset($alternativeHost['base_path'])) {
+                $swagger->basePath = $alternativeHost['base_path'];
+            }
+
+            if(isset($alternativeHost['schemes'])) {
+                $swagger->schemes = $alternativeHost['schemes'];
+            }
+        }
+
         $swagger->produces = $this->config['produces'];
         $swagger->consumes = $this->config['consumes'];
-        $swagger->schemes = $this->config['schemes'];
     }
 }

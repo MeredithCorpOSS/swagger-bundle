@@ -45,6 +45,12 @@ class ExportCommand extends Command
                 'f',
                 InputOption::VALUE_NONE,
                 'Force write the file, overwritting if it already exists'
+            )
+            ->addOption(
+                'alternative-host',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Alternative host name'
             );
     }
 
@@ -52,16 +58,21 @@ class ExportCommand extends Command
     {
         $file = $input->getArgument('file');
         $force = $input->getOption('force');
+        $alternativeHost = $input->getOption('alternative-host');
 
         if (is_dir($file)) {
-            $file = rtrim($file, '/').'/swagger.json';
+            if ($alternativeHost !== null) {
+                $file = rtrim($file, '/').'/swagger-'.$alternativeHost.'.json';
+            } else {
+                $file = rtrim($file, '/').'/swagger.json';
+            }
         }
 
         if (file_exists($file) && !$force) {
             throw new SwaggerException('File already exists. Use --force to skip file checks.');
         }
 
-        $this->swagger->save($file);
+        $this->swagger->save($file, $alternativeHost);
         $output->writeln('<fg=green>Written to '.realpath($file).'</>');
     }
 }

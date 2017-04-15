@@ -24,5 +24,19 @@ class SwaggerControllerTest extends WebTestCase
 
         $content = json_decode($client->getResponse()->getContent(), true);
         $this->assertTrue(is_array($content));
+        $this->assertEquals('testhost', $content['host']);
+    }
+
+    public function testAlternativeSchema()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/_swagger/swagger-production.json');
+
+        $this->assertEquals('application/json', $client->getResponse()->headers->get('Content-Type'));
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+        $this->assertTrue(is_array($content));
+        $this->assertEquals('productionhost', $content['host']);
     }
 }
