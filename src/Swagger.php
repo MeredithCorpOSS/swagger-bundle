@@ -53,15 +53,20 @@ class Swagger
     /**
      * Search for annotations, process and validate definitions.
      *
+     * @param null|string $alternativeHost
+     *
      * @return $this
      */
-    public function build()
+    public function build($alternativeHost = null)
     {
         // Crawl directory and parse all files
         $finder = Util::finder($this->directories, []);
         foreach ($finder as $file) {
             $this->analysis->addAnalysis($this->analyser->fromFile($file->getPathname()));
         }
+
+        // Set alternative host
+        $this->analysis->alternativeHost = $alternativeHost;
 
         // Post processing
         $this->analysis->process($this->processors);
@@ -75,23 +80,33 @@ class Swagger
     /**
      * Build and return OpenAPI json.
      *
+     * @param null|string $alternativeHost
+     * @param bool $pretty
+     *
      * @return \Swagger\Annotations\Swagger
      */
-    public function json()
+    public function json($alternativeHost = null, $pretty = false)
     {
-        $this->build();
+        $this->build($alternativeHost);
 
-        return json_encode($this->analysis->swagger);
+        $jsonOptions = JSON_UNESCAPED_SLASHES;
+
+        if ($pretty) {
+            $jsonOptions |= JSON_PRETTY_PRINT;
+        }
+
+        return json_encode($this->analysis->swagger, $jsonOptions);
     }
 
     /**
      * Build and save OpenAPI json to file.
      *
      * @param string $filename
+     * @param null|string $alternativeHost
      */
-    public function save($filename)
+    public function save($filename, $alternativeHost = null)
     {
-        $this->build();
+        $this->build($alternativeHost);
 
         $this->analysis->swagger->saveAs($filename);
     }

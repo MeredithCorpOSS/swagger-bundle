@@ -13,6 +13,8 @@ swagger:
     version: '2.0'      # Swagger version
     host: 'testhost'
     base_path: '/base'
+    alternative_hosts:
+        - { name: 'production', host: 'productionhost', schemes: [https], base_path: '/api' }
     info:
         title: 'My API' # Required
         version: '1.0'  # Required

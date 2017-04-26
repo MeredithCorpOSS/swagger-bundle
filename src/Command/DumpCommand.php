@@ -4,6 +4,7 @@ namespace TimeInc\SwaggerBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use TimeInc\SwaggerBundle\Swagger;
 
@@ -35,13 +36,28 @@ class DumpCommand extends Command
     {
         $this
             ->setName('swagger:dump')
-            ->setDescription('Dump the swagger schema');
+            ->setDescription('Dump the swagger schema')
+            ->addOption(
+                'alternative-host',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Alternative host name'
+            )
+            ->addOption(
+                'pretty',
+                'p',
+                InputOption::VALUE_NONE,
+                'Output pretty JSON'
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $alternativeHost = $input->getOption('alternative-host');
+        $pretty = $input->getOption('pretty');
+
         $output->write(
-            $this->swagger->json()
+            $this->swagger->json($alternativeHost, $pretty)
         );
     }
 }

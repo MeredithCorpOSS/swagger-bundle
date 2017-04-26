@@ -6,5 +6,9 @@
 
     <route id="swagger_schema" path="/_swagger/swagger.json">
         <default key="_controller">SwaggerBundle:Swagger:schema</default>
+        <default key="alternativeHost" xsi:nil="true" />
+    </route>
+    <route id="swagger_schema_alternative" path="/_swagger/swagger-{alternativeHost}.json">
+        <default key="_controller">SwaggerBundle:Swagger:schema</default>
     </route>
 </routes>
