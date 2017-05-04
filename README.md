@@ -61,7 +61,7 @@ swagger:
     annotations:
         bundles:
             - AcmeDemoBundle
-    pretty: true
+    pretty_json: true
 ```
 
 The full [configuration reference](docs/configuration-reference.md) for a comprehensive list of all values and defaults.
