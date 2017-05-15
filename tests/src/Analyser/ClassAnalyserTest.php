@@ -1,14 +1,14 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Tests\Analyser;
+namespace DrakeRoll\SwaggerBundle\Tests\Analyser;
 
 use Symfony\Component\Finder\Finder;
-use TimeInc\SwaggerBundle\Analyser\ClassAnalyser;
+use DrakeRoll\SwaggerBundle\Analyser\ClassAnalyser;
 
 /**
  * Class ClassAnalyserTest.
  *
- * @author Andy Thorne <andy.thorne@timeinc.com>
+ * @author Andy Thorne <andy.thorne@DrakeRoll.com>
  */
 class ClassAnalyserTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +24,7 @@ class ClassAnalyserTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(1, $classes);
         $this->assertEquals(
-            'TimeInc\SwaggerBundle\Tests\fixtures\TestApp\Component\Controller\TestController',
+            'DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\Component\Controller\TestController',
             $classes[0]
         );
     }
@@ -41,7 +41,7 @@ class ClassAnalyserTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(2, $classes);
         $this->assertContains('AnotherNamespace\AnotherClass', $classes);
-        $this->assertContains('TimeInc\SwaggerBundle\Tests\fixtures\TestApp\Component\TestAnnotations', $classes);
+        $this->assertContains('DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\Component\TestAnnotations', $classes);
     }
 
     /**
@@ -62,7 +62,7 @@ class ClassAnalyserTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('class1', $classes);
         $this->assertContains('class2', $classes);
         $this->assertContains('AnotherNamespace\AnotherClass', $classes);
-        $this->assertContains('TimeInc\SwaggerBundle\Tests\fixtures\TestApp\Component\TestAnnotations', $classes);
+        $this->assertContains('DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\Component\TestAnnotations', $classes);
     }
 
     /**
@@ -80,10 +80,10 @@ class ClassAnalyserTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(3, $classes);
         $this->assertContains(
-            'TimeInc\SwaggerBundle\Tests\fixtures\TestApp\Component\Controller\TestController',
+            'DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\Component\Controller\TestController',
             $classes
         );
         $this->assertContains('AnotherNamespace\AnotherClass', $classes);
-        $this->assertContains('TimeInc\SwaggerBundle\Tests\fixtures\TestApp\Component\TestAnnotations', $classes);
+        $this->assertContains('DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\Component\TestAnnotations', $classes);
     }
 }

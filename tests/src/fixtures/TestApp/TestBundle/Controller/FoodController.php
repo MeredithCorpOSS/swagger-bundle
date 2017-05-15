@@ -1,13 +1,13 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Controller;
+namespace DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Controller;
 
-use TimeInc\SwaggerBundle\Swagger\Annotation\Route;
+use DrakeRoll\SwaggerBundle\Swagger\Annotation\Route;
 
 /**
  * Class FoodController.
  *
- * @author andy.thorne@timeinc.com
+ * @author andy.thorne@DrakeRoll.com
  *
  * @Route(
  *     method="getFoods",

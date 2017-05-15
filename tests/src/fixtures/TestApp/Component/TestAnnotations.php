@@ -6,12 +6,12 @@ namespace AnotherNamespace {
     }
 }
 
-namespace TimeInc\SwaggerBundle\Tests\fixtures\TestApp\Component {
+namespace DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\Component {
 
     /**
      * Class TestAnnotations.
      *
-     * @author Andy Thorne <andy.thorne@timeinc.com>
+     * @author Andy Thorne <andy.thorne@DrakeRoll.com>
      */
     class TestAnnotations
     {

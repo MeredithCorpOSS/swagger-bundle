@@ -1,11 +1,11 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Swagger\Annotation;
+namespace DrakeRoll\SwaggerBundle\Swagger\Annotation;
 
 /**
  * Class Route.
  *
- * @author andy.thorne@timeinc.com
+ * @author andy.thorne@DrakeRoll.com
  *
  * @Annotation
  * @Target({"CLASS","METHOD"})

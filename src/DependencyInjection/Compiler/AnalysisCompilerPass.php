@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\DependencyInjection\Compiler;
+namespace DrakeRoll\SwaggerBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Class AnalysisCompilerPass.
  *
- * @author andy.thorne@timeinc.com
+ * @author andy.thorne@DrakeRoll.com
  */
 class AnalysisCompilerPass implements CompilerPassInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Controller;
+namespace DrakeRoll\SwaggerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\BrowserKit\Request;

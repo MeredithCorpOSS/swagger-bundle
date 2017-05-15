@@ -1,13 +1,13 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Tests\fixtures\Processor;
+namespace DrakeRoll\SwaggerBundle\Tests\fixtures\Processor;
 
 use Swagger\Analysis;
 
 /**
  * Class DummyProcessor.
  *
- * @author andy.thorne@timeinc.com
+ * @author andy.thorne@DrakeRoll.com
  */
 class DummyProcessor
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Swagger\Processor;
+namespace DrakeRoll\SwaggerBundle\Swagger\Processor;
 
 use Swagger\Analysis;
 use Swagger\Annotations\Delete;
@@ -13,13 +13,13 @@ use Swagger\Annotations\Post;
 use Swagger\Annotations\Put;
 use Swagger\Annotations\Response;
 use Symfony\Component\Routing\RouterInterface;
-use TimeInc\SwaggerBundle\Exception\SwaggerException;
-use TimeInc\SwaggerBundle\Swagger\Annotation\Route;
+use DrakeRoll\SwaggerBundle\Exception\SwaggerException;
+use DrakeRoll\SwaggerBundle\Swagger\Annotation\Route;
 
 /**
  * Class RouteProcessor.
  *
- * @author andy.thorne@timeinc.com
+ * @author andy.thorne@DrakeRoll.com
  */
 class RouteProcessor
 {

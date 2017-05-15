@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Swagger\Processor;
+namespace DrakeRoll\SwaggerBundle\Swagger\Processor;
 
 use Swagger\Analysis;
 use Swagger\Annotations\Info;
@@ -8,7 +8,7 @@ use Swagger\Annotations\Info;
 /**
  * Class SymfonyConfigProcessor.
  *
- * @author andy.thorne@timeinc.com
+ * @author andy.thorne@DrakeRoll.com
  */
 class SymfonyConfigProcessor
 {

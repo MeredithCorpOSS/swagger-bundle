@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\DependencyInjection;
+namespace DrakeRoll\SwaggerBundle\DependencyInjection;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
@@ -12,9 +12,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use TimeInc\SwaggerBundle\Analyser\ClassAnalyser;
-use TimeInc\SwaggerBundle\Exception\SwaggerException;
-use TimeInc\SwaggerBundle\Swagger\Annotation\Route;
+use DrakeRoll\SwaggerBundle\Analyser\ClassAnalyser;
+use DrakeRoll\SwaggerBundle\Exception\SwaggerException;
+use DrakeRoll\SwaggerBundle\Swagger\Annotation\Route;
 
 /**
  * This is the class that loads and manages your bundle configuration.
@@ -33,7 +33,7 @@ class SwaggerExtension extends Extension
             function ($class) {
                 $dir = dirname(__DIR__);
                 if (file_exists($dir.'/Swagger/Annotation/'.$class.'.php')) {
-                    class_exists('TimeInc\\SwaggerBundle\\Swagger\\Annotation\\'.$class);
+                    class_exists('DrakeRoll\\SwaggerBundle\\Swagger\\Annotation\\'.$class);
                 }
 
                 return false;

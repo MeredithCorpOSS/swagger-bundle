@@ -1,19 +1,19 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Command;
+namespace DrakeRoll\SwaggerBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use TimeInc\SwaggerBundle\Exception\SwaggerException;
-use TimeInc\SwaggerBundle\Swagger;
+use DrakeRoll\SwaggerBundle\Exception\SwaggerException;
+use DrakeRoll\SwaggerBundle\Swagger;
 
 /**
  * Class ExportCommand.
  *
- * @author Andy Thorne <andy.thorne@timeinc.com>
+ * @author Andy Thorne <andy.thorne@DrakeRoll.com>
  */
 class ExportCommand extends Command
 {
