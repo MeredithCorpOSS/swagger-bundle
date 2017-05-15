@@ -1,9 +1,7 @@
 {
-    "name": "danil/swagger-bundle",
+    "name": "drakeroll/swagger-bundle",
     "require": {
-        "symfony/symfony": "^3.2"
-    },
-    "require-dev": {
+        "symfony/symfony": "^3.2",
         "zircote/swagger-php": "^2.0"
     },
     "license": "MIT",
