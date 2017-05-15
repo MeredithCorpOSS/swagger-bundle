@@ -37,7 +37,7 @@ class RouteProcessor
      * FosRestProcessor constructor.
      *
      * @param RouterInterface $router
-     * @param array           $controllerOptions
+     * @param array $controllerOptions
      */
     public function __construct(RouterInterface $router, array $controllerOptions)
     {
@@ -111,7 +111,7 @@ class RouteProcessor
                     if ($routeVariable == $methodParameter->getName()) {
                         if (method_exists($methodParameter, 'hasType') && $methodParameter->hasType()) {
                             list($parameter->type, $parameter->format) = $this->mapType(
-                                (string) $methodParameter->getType()
+                                (string)$methodParameter->getType()
                             );
                             $parameter->required = !$methodParameter->isDefaultValueAvailable();
                             if (!$parameter->required) {
@@ -146,24 +146,7 @@ class RouteProcessor
                 }
             }
 
-            // add annotation query params
-            foreach ($options['queryParams'] as $queryKey => $queryDataType) {
-                if (!isset($path->parameters[$queryKey])) {
-                    $parameterData = [
-                        'parameter' => $queryKey,
-                        'name' => $queryKey,
-                        'type' => $queryDataType,
-                        'in' => 'query',
-                    ];
-                    if ($queryDataType == 'array') {
-                        $parameterData['items'] = [
-                            'type' => 'string'
-                        ];
-                    }
-                    $parameter = new Parameter($parameterData);
-                    $path->parameters[$queryKey] = $parameter;
-                }
-            }
+
 
             // add annotation headers
             foreach ($options['headers'] as $headerKey => $headerDataType) {
@@ -222,7 +205,7 @@ class RouteProcessor
     /**
      * Configure a Get annotation with FosRest data.
      *
-     * @param Get   $operation
+     * @param Get $operation
      * @param array $options
      */
     private function configureGet(Get $operation, array $options)
@@ -233,6 +216,19 @@ class RouteProcessor
             } else {
                 $operation->summary = 'Fetch a collection of '.$options['entity_name'].' entities';
             }
+        }
+
+        foreach ($options as $key=>$value) {
+            if(!isset($operation->{$key}) && in_array($key,array_keys($operation::$_types)))
+                $operation->{$key}=$value;
+        }
+
+        if (!$operation->description) {
+            $operation->description = 'Edit a '.$options['entity_name'].' entity';
+        }
+
+        if (!$operation->operationId) {
+            $operation->operationId = $options['method'];
         }
 
         // verify that the x-collection property is set
@@ -278,16 +274,30 @@ class RouteProcessor
     /**
      * Configure a Post annotation with FosRest data.
      *
-     * @param Post  $operation
+     * @param Post $operation
      * @param array $options
      */
     private function configurePost(Post $operation, array $options)
     {
-        if (!$operation->summary) {
-            $operation->summary = 'Create a '.$options['entity_name'].' entity';
+        foreach ($options as $key=>$value) {
+            if(!isset($operation->{$key}) && in_array($key,array_keys($operation::$_types)))
+                $operation->{$key}=$value;
         }
 
-        if (!isset($operation->parameters['body'])) {
+        if (!$operation->summary) {
+            $operation->summary = 'Edit a '.$options['entity_name'].' entity';
+        }
+
+        if (!$operation->description) {
+            $operation->description = 'Edit a '.$options['entity_name'].' entity';
+        }
+
+        if (!$operation->operationId) {
+            $operation->operationId = $options['method'];
+        }
+
+
+        if (isset($operation->parameters['body'])) {
             $operation->parameters[] = new Parameter(
                 [
                     'parameter' => 'body',
@@ -301,38 +311,84 @@ class RouteProcessor
             );
         }
 
+        // add annotation query params
+        foreach ($options['queryParams'] as $queryKey => $queryDataType) {
+
+            $parameterData = [
+                'name' => $queryKey,
+                'in' => 'query',
+                'description' => $queryKey,
+                'required' => false,
+                'type' => $queryDataType,
+
+            ];
+            if ($queryDataType == 'array') {
+                $parameterData['items'] = [
+                    'type' => 'string',
+                ];
+            }
+            $operation->parameters[] = new Parameter($parameterData);
+        }
+
+        $response = [];
+        if (!empty($options['responses'])) {
+            foreach ($options['responses'] as $resp) {
+                $response[] = new Response(
+                    $resp
+                );
+            }
+        }
+
+
         $this->appendResponses(
             $operation,
-            [
-                new Response(
-                    [
-                        'response' => 201,
-                        'description' => 'Entity Created',
-                    ]
-                ),
-                new Response(
-                    [
-                        'response' => 400,
-                        'description' => 'Validation Exception',
-                    ]
-                ),
-            ]
+            (!empty($response))
+                ? $response :
+                [
+                    new Response(
+                        [
+                            'response' => 201,
+                            'description' => 'Entity Created',
+                        ]
+                    ),
+                    new Response(
+                        [
+                            'response' => 400,
+                            'description' => 'Validation Exception',
+                        ]
+                    ),
+                ]
         );
     }
 
     /**
      * Configure a Put annotation with FosRest data.
      *
-     * @param Put   $operation
+     * @param Put $operation
      * @param array $options
      */
     private function configurePut(Put $operation, array $options)
     {
+
+        foreach ($options as $key=>$value) {
+            if(!isset($operation->{$key}) && in_array($key,array_keys($operation::$_types)))
+                $operation->{$key}=$value;
+        }
+
         if (!$operation->summary) {
             $operation->summary = 'Edit a '.$options['entity_name'].' entity';
         }
 
-        if (!isset($operation->parameters['body'])) {
+        if (!$operation->description) {
+            $operation->description = 'Edit a '.$options['entity_name'].' entity';
+        }
+
+        if (!$operation->operationId) {
+            $operation->operationId = $options['method'];
+        }
+
+
+        if (isset($operation->parameters['body'])) {
             $operation->parameters[] = new Parameter(
                 [
                     'parameter' => 'body',
@@ -346,28 +402,60 @@ class RouteProcessor
             );
         }
 
+        // add annotation query params
+        foreach ($options['queryParams'] as $queryKey => $queryDataType) {
+
+            $parameterData = [
+                'name' => $queryKey,
+                'in' => 'query',
+                'description' => $queryKey,
+                'required' => false,
+                'type' => $queryDataType,
+
+            ];
+            if ($queryDataType == 'array') {
+                $parameterData['items'] = [
+                    'type' => 'string',
+                ];
+            }
+            $operation->parameters[] = new Parameter($parameterData);
+        }
+
+        $response = [];
+        if (!empty($options['responses'])) {
+            foreach ($options['responses'] as $resp) {
+                $response[] = new Response(
+                    $resp
+                );
+            }
+        }
+
+
         $this->appendResponses(
             $operation,
-            [
-                new Response(
-                    [
-                        'response' => 204,
-                        'description' => 'Entity Updated',
-                    ]
-                ),
-                new Response(
-                    [
-                        'response' => 400,
-                        'description' => 'Validation Exception',
-                    ]
-                ),
-                new Response(
-                    [
-                        'response' => 404,
-                        'description' => 'Entity Not Found',
-                    ]
-                ),
-            ]
+            (!empty($response))
+                ? $response :
+                [
+                    new Response(
+                        [
+                            'response' => 204,
+                            'description' => 'Entity Updated',
+                        ]
+                    ),
+                    new Response(
+                        [
+                            'response' => 400,
+                            'description' => 'Validation Exception',
+                        ]
+                    ),
+                    new Response(
+                        [
+                            'response' => 404,
+                            'description' => 'Entity Not Found',
+                        ]
+                    ),
+                ]
+
         );
     }
 
@@ -377,8 +465,11 @@ class RouteProcessor
      * @param Patch $operation
      * @param array $options
      */
-    private function configurePatch(Patch $operation, array $options)
-    {
+    private
+    function configurePatch(
+        Patch $operation,
+        array $options
+    ) {
         if (!$operation->summary) {
             $operation->summary = 'Edit fields of a '.$options['entity_name'].' entity';
         }
@@ -426,10 +517,13 @@ class RouteProcessor
      * Configure a Delete annotation with FosRest data.
      *
      * @param Delete $operation
-     * @param array  $options
+     * @param array $options
      */
-    private function configureDelete(Delete $operation, array $options)
-    {
+    private
+    function configureDelete(
+        Delete $operation,
+        array $options
+    ) {
         if (!$operation->summary) {
             $operation->summary = 'Delete a '.$options['entity_name'].' entity';
         }
@@ -465,8 +559,10 @@ class RouteProcessor
      *
      * @return array
      */
-    private function mapType($type)
-    {
+    private
+    function mapType(
+        $type
+    ) {
         switch ($type) {
             case 'int':
                 return ['number', 'integer'];
@@ -483,10 +579,13 @@ class RouteProcessor
      * Append responses onto an operation, checking first if they are already configured.
      *
      * @param Operation $operation
-     * @param array     $newResponses
+     * @param array $newResponses
      */
-    private function appendResponses(Operation $operation, array $newResponses)
-    {
+    private
+    function appendResponses(
+        Operation $operation,
+        array $newResponses
+    ) {
         foreach ($newResponses as $newResponse) {
             if (!$operation->responses) {
                 $operation->responses = [];
