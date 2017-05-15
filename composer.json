@@ -1,21 +1,18 @@
 {
-    "name": "timeinc/swagger-bundle",
-    "description": "Implementation of swagger-php for Symfony",
-    "type": "library",
+    "name": "danil/swagger-bundle",
+    "description": "fixed swager bundle",
+    "require": {
+        "zircote/swagger-php": "^2.0",
+        "symfony/symfony": "3.0"
+    },
     "license": "MIT",
     "authors": [
         {
-            "name": "Andy Thorne",
-            "email": "andy.thorne@timeinc.com"
+            "name": "Danil Vereschak",
+            "email": "d.vereshchak@globalgames.net"
         }
     ],
-    "require": {
-        "zircote/swagger-php": "~2.0",
-        "symfony/symfony": "^2.7|^3.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^4.8|^5.7"
-    },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": { "TimeInc\\SwaggerBundle\\": "src/" }
     },
