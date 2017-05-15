@@ -1,9 +1,10 @@
 {
     "name": "danil/swagger-bundle",
-    "description": "fixed swager bundle",
     "require": {
-        "zircote/swagger-php": "^2.0",
-        "symfony/symfony": "3.0"
+        "symfony/symfony": "^3.2"
+    },
+    "require-dev": {
+        "zircote/swagger-php": "^2.0"
     },
     "license": "MIT",
     "authors": [
@@ -11,12 +12,5 @@
             "name": "Danil Vereschak",
             "email": "d.vereshchak@globalgames.net"
         }
-    ],
-    "minimum-stability": "dev",
-    "autoload": {
-        "psr-4": { "TimeInc\\SwaggerBundle\\": "src/" }
-    },
-    "autoload-dev": {
-        "psr-4": { "TimeInc\\SwaggerBundle\\Tests\\": "tests/src/" }
-    }
+    ]
 }
