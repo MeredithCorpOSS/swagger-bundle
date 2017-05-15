@@ -1,5 +1,5 @@
 {
-    "name": "drakeroll/swagger-bundle",
+    "name": "drake/swagger-bundle",
     "require": {
         "symfony/symfony": "^3.2",
         "zircote/swagger-php": "^2.0"
