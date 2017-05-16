@@ -101,10 +101,10 @@ class RouteProcessor
                 }
                 $parameter = new Parameter(
                     [
-                        'parameter' => $routeVariable,
                         'name' => $routeVariable,
-                        'type' => 'string',
                         'in' => 'path',
+                        "required"=> true,
+                        'type' => 'string'
                     ]
                 );
                 foreach ($methodParameters as $methodParameter) {
@@ -121,7 +121,7 @@ class RouteProcessor
                         break;
                     }
                 }
-                $path->parameters[$routeVariable] = $parameter;
+                $path->parameters[] = $parameter;
             }
 
             // query parameters
