@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Tests\Controller;
+namespace DrakeRoll\SwaggerBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

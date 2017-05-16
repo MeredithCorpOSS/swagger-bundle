@@ -1,13 +1,13 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Tests\fixtures\TestApp\OverrideTestBundle;
+namespace DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\OverrideTestBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Class OverrideTestBundle.
  *
- * @author Andy Thorne <andy.thorne@timeinc.com>
+ * @author Andy Thorne <andy.thorne@DrakeRoll.com>
  */
 class OverrideTestBundle extends Bundle
 {

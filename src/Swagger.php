@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeInc\SwaggerBundle;
+namespace DrakeRoll\SwaggerBundle;
 
 use Swagger\Analyser;
 use Swagger\Analysis;
@@ -10,7 +10,7 @@ use Swagger\Util;
 /**
  * Class Swagger.
  *
- * @author andy.thorne@timeinc.com
+ * @author andy.thorne@DrakeRoll.com
  */
 class Swagger
 {

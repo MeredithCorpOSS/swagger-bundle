@@ -1,12 +1,12 @@
 {
-    "name": "timeinc/swagger-bundle",
+    "name": "drakeroll/swagger-bundle",
     "description": "Implementation of swagger-php for Symfony",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Andy Thorne",
-            "email": "andy.thorne@timeinc.com"
+            "name": "DV",
+            "email": "d.vereshchak@globalgames.net"
         }
     ],
     "require": {
@@ -17,9 +17,9 @@
         "phpunit/phpunit": "^4.8|^5.7"
     },
     "autoload": {
-        "psr-4": { "TimeInc\\SwaggerBundle\\": "src/" }
+        "psr-4": { "DrakeRoll\\SwaggerBundle\\": "src/" }
     },
     "autoload-dev": {
-        "psr-4": { "TimeInc\\SwaggerBundle\\Tests\\": "tests/src/" }
+        "psr-4": { "DrakeRoll\\SwaggerBundle\\Tests\\": "tests/src/" }
     }
 }

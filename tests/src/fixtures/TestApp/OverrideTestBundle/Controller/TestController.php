@@ -1,13 +1,13 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Tests\fixtures\TestApp\OverrideTestBundle\Controller;
+namespace DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\OverrideTestBundle\Controller;
 
 use Swagger\Annotations as SWG;
 
 /**
  * Class TestController.
  *
- * @author Andy Thorne <andy.thorne@timeinc.com>
+ * @author Andy Thorne <andy.thorne@DrakeRoll.com>
  *
  * @SWG\Path(
  *      path="/test"

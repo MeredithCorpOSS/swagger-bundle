@@ -1,17 +1,17 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Tests;
+namespace DrakeRoll\SwaggerBundle\Tests;
 
 use Swagger\Analyser;
 use Swagger\Analysis;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Filesystem\Filesystem;
-use TimeInc\SwaggerBundle\Swagger;
+use DrakeRoll\SwaggerBundle\Swagger;
 
 /**
  * Class SwaggerTest.
  *
- * @author andy.thorne@timeinc.com
+ * @author andy.thorne@DrakeRoll.com
  */
 class SwaggerTest extends KernelTestCase
 {

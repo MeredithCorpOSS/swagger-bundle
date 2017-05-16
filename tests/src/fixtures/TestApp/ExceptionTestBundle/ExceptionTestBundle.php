@@ -1,13 +1,13 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Tests\fixtures\TestApp\ExceptionTestBundle;
+namespace DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\ExceptionTestBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Class ExceptionTestBundle.
  *
- * @author Andy Thorne <andy.thorne@timeinc.com>
+ * @author Andy Thorne <andy.thorne@DrakeRoll.com>
  */
 class ExceptionTestBundle extends Bundle
 {

@@ -1,7 +1,7 @@
 # SwaggerBundle
 
-[![Travis](https://img.shields.io/travis/TimeIncOSS/swagger-bundle.svg?style=flat-square)](https://travis-ci.org/TimeIncOSS/swagger-bundle)
-[![Packagist](https://img.shields.io/packagist/dt/timeinc/swagger-bundle.svg?style=flat-square)](https://packagist.org/packages/timeinc/swagger-bundle)
+[![Travis](https://img.shields.io/travis/DrakeRollOSS/swagger-bundle.svg?style=flat-square)](https://travis-ci.org/DrakeRollOSS/swagger-bundle)
+[![Packagist](https://img.shields.io/packagist/dt/DrakeRoll/swagger-bundle.svg?style=flat-square)](https://packagist.org/packages/DrakeRoll/swagger-bundle)
 
 This bundle provides integration of [swagger-php](https://github.com/zircote/swagger-php) in [Symfony](https://symfony.com/).
 It should only run in the dev environment, as searching for annotations at runtime is not performant. The bundle comes 
@@ -11,7 +11,7 @@ with the ability to generate a `swagger.json` file that can be statically served
 
 Install via Composer:
 ```bash
-composer require timeinc/swagger-bundle --dev
+composer require DrakeRoll/swagger-bundle --dev
 ```
 
 ## Enable Bundle
@@ -27,7 +27,7 @@ class AppKernel extends Kernel
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             // ...
-            $bundles[] = new TimeInc\SwaggerBundle\SwaggerBundle();
+            $bundles[] = new DrakeRoll\SwaggerBundle\SwaggerBundle();
         }
 
         // ...
@@ -97,7 +97,7 @@ for details about swagger-php's syntax.
 
 ### Symfony Routes
 
-This bundle comes with an extra `\TimeInc\SwaggerBundle\Swagger\Annotation\Route` annotation that allows you to define
+This bundle comes with an extra `\DrakeRoll\SwaggerBundle\Swagger\Annotation\Route` annotation that allows you to define
 a symfony route as a swagger endpoint. using the annotation will set a swagger path for each method and add parameters
 for the path variables and any defaults as query strings.
 
@@ -121,7 +121,7 @@ The annotation can be defined on a class or a method with the following properie
 
 namespace Acme\PetBundle\Controller;
 
-use TimeInc\SwaggerBundle\Swagger\Annotation\Route;
+use DrakeRoll\SwaggerBundle\Swagger\Annotation\Route;
 
 /**
  * @Route(

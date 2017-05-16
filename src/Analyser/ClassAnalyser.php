@@ -1,13 +1,13 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Analyser;
+namespace DrakeRoll\SwaggerBundle\Analyser;
 
 use Symfony\Component\Finder\Finder;
 
 /**
  * Class ClassAnalyser.
  *
- * @author Andy Thorne <andy.thorne@timeinc.com>
+ * @author Andy Thorne <andy.thorne@DrakeRoll.com>
  */
 class ClassAnalyser
 {

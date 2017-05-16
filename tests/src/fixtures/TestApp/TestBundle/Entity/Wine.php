@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Entity;
+namespace DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Entity;
 
 use Swagger\Annotations\Definition;
 use Swagger\Annotations\Property;
@@ -8,7 +8,7 @@ use Swagger\Annotations\Property;
 /**
  * Class Wine.
  *
- * @author andy.thorne@timeinc.com
+ * @author andy.thorne@DrakeRoll.com
  *
  * @Definition()
  */

@@ -8,15 +8,15 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array();
-        $bundles[] = new TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\TestBundle();
+        $bundles[] = new DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\TestBundle();
 
         if ($this->getEnvironment() == 'test_annotation_override') {
-            $bundles[] = new TimeInc\SwaggerBundle\Tests\fixtures\TestApp\OverrideTestBundle\OverrideTestBundle();
+            $bundles[] = new DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\OverrideTestBundle\OverrideTestBundle();
         }
 
         if (in_array($this->getEnvironment(), array('test', 'test_annotation_override'))) {
             $bundles[] = new Symfony\Bundle\FrameworkBundle\FrameworkBundle();
-            $bundles[] = new TimeInc\SwaggerBundle\SwaggerBundle();
+            $bundles[] = new DrakeRoll\SwaggerBundle\SwaggerBundle();
         }
 
         return $bundles;

@@ -1,13 +1,13 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Tests\Swagger\Annotation;
+namespace DrakeRoll\SwaggerBundle\Tests\Swagger\Annotation;
 
-use TimeInc\SwaggerBundle\Swagger\Annotation\Route;
+use DrakeRoll\SwaggerBundle\Swagger\Annotation\Route;
 
 /**
  * Class RouteTest.
  *
- * @author Andy Thorne <andy.thorne@timeinc.com>
+ * @author Andy Thorne <andy.thorne@DrakeRoll.com>
  */
 class RouteTest extends \PHPUnit_Framework_TestCase
 {

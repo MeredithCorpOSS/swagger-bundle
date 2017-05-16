@@ -1,6 +1,6 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Tests\Swagger\Processor;
+namespace DrakeRoll\SwaggerBundle\Tests\Swagger\Processor;
 
 use Swagger\Analysis;
 use Swagger\Annotations\Delete;
@@ -14,16 +14,16 @@ use Swagger\Annotations\Swagger;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\Route as SymfonyRoute;
 use Symfony\Component\Routing\RouteCollection;
-use TimeInc\SwaggerBundle\Exception\SwaggerException;
-use TimeInc\SwaggerBundle\Swagger\Annotation\Route;
-use TimeInc\SwaggerBundle\Swagger\Processor\RouteProcessor;
-use TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Controller\FoodController;
-use TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Entity\Food;
+use DrakeRoll\SwaggerBundle\Exception\SwaggerException;
+use DrakeRoll\SwaggerBundle\Swagger\Annotation\Route;
+use DrakeRoll\SwaggerBundle\Swagger\Processor\RouteProcessor;
+use DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Controller\FoodController;
+use DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\Entity\Food;
 
 /**
  * Class RouteProcessorTest.
  *
- * @author Andy Thorne <andy.thorne@timeinc.com>
+ * @author Andy Thorne <andy.thorne@DrakeRoll.com>
  */
 class RouteProcessorTest extends \PHPUnit_Framework_TestCase
 {

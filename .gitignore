@@ -2,3 +2,4 @@ tests/var/*
 reports/
 vendor/
 composer.lock
+.idea

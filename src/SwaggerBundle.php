@@ -1,8 +1,8 @@
 <?php
 
-namespace TimeInc\SwaggerBundle;
+namespace DrakeRoll\SwaggerBundle;
 
-use TimeInc\SwaggerBundle\DependencyInjection\Compiler\AnalysisCompilerPass;
+use DrakeRoll\SwaggerBundle\DependencyInjection\Compiler\AnalysisCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

@@ -1,16 +1,16 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Tests\Command;
+namespace DrakeRoll\SwaggerBundle\Tests\Command;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use TimeInc\SwaggerBundle\Command\DumpCommand;
+use DrakeRoll\SwaggerBundle\Command\DumpCommand;
 
 /**
  * Class DumpCommandTest.
  *
- * @author Andy Thorne <andy.thorne@timeinc.com>
+ * @author Andy Thorne <andy.thorne@DrakeRoll.com>
  */
 class DumpCommandTest extends KernelTestCase
 {

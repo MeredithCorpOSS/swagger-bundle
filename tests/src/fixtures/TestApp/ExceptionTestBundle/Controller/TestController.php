@@ -1,13 +1,13 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Tests\fixtures\TestApp\ExceptionTestBundle\Controller;
+namespace DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\ExceptionTestBundle\Controller;
 
-use TimeInc\SwaggerBundle\Swagger\Annotation\Route;
+use DrakeRoll\SwaggerBundle\Swagger\Annotation\Route;
 
 /**
  * Class TestController.
  *
- * @author Andy Thorne <andy.thorne@timeinc.com>
+ * @author Andy Thorne <andy.thorne@DrakeRoll.com>
  *
  * @Route(
  *     route="test_page",

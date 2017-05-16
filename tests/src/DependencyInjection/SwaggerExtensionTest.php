@@ -1,18 +1,18 @@
 <?php
 
-namespace TimeInc\SwaggerBundle\Tests\src\DependencyInjection;
+namespace DrakeRoll\SwaggerBundle\Tests\src\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Filesystem\Filesystem;
-use TimeInc\SwaggerBundle\DependencyInjection\SwaggerExtension;
-use TimeInc\SwaggerBundle\Exception\SwaggerException;
-use TimeInc\SwaggerBundle\Tests\fixtures\TestApp\ExceptionTestBundle\ExceptionTestBundle;
-use TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\TestBundle;
+use DrakeRoll\SwaggerBundle\DependencyInjection\SwaggerExtension;
+use DrakeRoll\SwaggerBundle\Exception\SwaggerException;
+use DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\ExceptionTestBundle\ExceptionTestBundle;
+use DrakeRoll\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\TestBundle;
 
 /**
  * Class SwaggerExtensionTest.
  *
- * @author Andy Thorne <andy.thorne@timeinc.com>
+ * @author Andy Thorne <andy.thorne@DrakeRoll.com>
  */
 class SwaggerExtensionTest extends \PHPUnit_Framework_TestCase
 {

@@ -5,13 +5,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="swagger.class">TimeInc\SwaggerBundle\Swagger</parameter>
+        <parameter key="swagger.class">DrakeRoll\SwaggerBundle\Swagger</parameter>
         <parameter key="swagger.analyser.class">Swagger\StaticAnalyser</parameter>
         <parameter key="swagger.analysis.class">Swagger\Analysis</parameter>
-        <parameter key="swagger.processor.symfony_config.class">TimeInc\SwaggerBundle\Swagger\Processor\SymfonyConfigProcessor</parameter>
-        <parameter key="swagger.processor.route.class">TimeInc\SwaggerBundle\Swagger\Processor\RouteProcessor</parameter>
-        <parameter key="swagger.command.dump.class">TimeInc\SwaggerBundle\Command\DumpCommand</parameter>
-        <parameter key="swagger.command.export.class">TimeInc\SwaggerBundle\Command\ExportCommand</parameter>
+        <parameter key="swagger.processor.symfony_config.class">DrakeRoll\SwaggerBundle\Swagger\Processor\SymfonyConfigProcessor</parameter>
+        <parameter key="swagger.processor.route.class">DrakeRoll\SwaggerBundle\Swagger\Processor\RouteProcessor</parameter>
+        <parameter key="swagger.command.dump.class">DrakeRoll\SwaggerBundle\Command\DumpCommand</parameter>
+        <parameter key="swagger.command.export.class">DrakeRoll\SwaggerBundle\Command\ExportCommand</parameter>
     </parameters>
 
     <services>
