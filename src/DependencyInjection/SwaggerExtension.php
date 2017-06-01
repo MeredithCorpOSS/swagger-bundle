@@ -14,6 +14,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use TimeInc\SwaggerBundle\Analyser\ClassAnalyser;
 use TimeInc\SwaggerBundle\Exception\SwaggerException;
+use TimeInc\SwaggerBundle\Swagger\Annotation\AnnotationLoader;
 use TimeInc\SwaggerBundle\Swagger\Annotation\Route;
 
 /**
@@ -30,14 +31,7 @@ class SwaggerExtension extends Extension
     {
         // Load all whitelisted annotations
         AnnotationRegistry::registerLoader(
-            function ($class) {
-                $dir = dirname(__DIR__);
-                if (file_exists($dir.'/Swagger/Annotation/'.$class.'.php')) {
-                    class_exists('TimeInc\\SwaggerBundle\\Swagger\\Annotation\\'.$class);
-                }
-
-                return false;
-            }
+            [AnnotationLoader::class, 'load']
         );
 
         $configuration = new Configuration();

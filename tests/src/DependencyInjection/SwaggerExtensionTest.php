@@ -2,10 +2,12 @@
 
 namespace TimeInc\SwaggerBundle\Tests\src\DependencyInjection;
 
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Filesystem\Filesystem;
 use TimeInc\SwaggerBundle\DependencyInjection\SwaggerExtension;
 use TimeInc\SwaggerBundle\Exception\SwaggerException;
+use TimeInc\SwaggerBundle\Swagger\Annotation\AnnotationLoader;
 use TimeInc\SwaggerBundle\Tests\fixtures\TestApp\ExceptionTestBundle\ExceptionTestBundle;
 use TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\TestBundle;
 
@@ -38,6 +40,8 @@ class SwaggerExtensionTest extends \PHPUnit_Framework_TestCase
         $this->container->setParameter('kernel.bundles', ['TestBundle' => TestBundle::class]);
         $this->container->setParameter('kernel.cache_dir', $cacheDir);
         $this->container->register('swagger');
+
+        AnnotationRegistry::reset();
 
         if (is_dir($cacheDir)) {
             $fs = new Filesystem();
@@ -82,6 +86,8 @@ class SwaggerExtensionTest extends \PHPUnit_Framework_TestCase
                 )
             );
         }
+
+        $this->assertAnnotationLoaderRegistered();
     }
 
     /**
@@ -109,6 +115,8 @@ class SwaggerExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $annotationDirs);
         $this->assertCount(1, $annotationDirs);
         $this->assertStringEndsWith('/fixtures/TestApp/Component', $annotationDirs[0]);
+
+        $this->assertAnnotationLoaderRegistered();
     }
 
     /**
@@ -132,6 +140,8 @@ class SwaggerExtensionTest extends \PHPUnit_Framework_TestCase
             ),
             $this->container
         );
+
+        $this->assertAnnotationLoaderRegistered();
     }
 
     /**
@@ -168,5 +178,11 @@ class SwaggerExtensionTest extends \PHPUnit_Framework_TestCase
         }
 
         return $configs;
+    }
+
+    private function assertAnnotationLoaderRegistered()
+    {
+        $annotationLoaders = $this->getStaticAttribute(AnnotationRegistry::class, 'loaders');
+        $this->assertContains([AnnotationLoader::class, 'load'], $annotationLoaders);
     }
 }
