@@ -6,12 +6,12 @@
     "authors": [
         {
             "name": "Andy Thorne",
-            "email": "andy.thorne@timeinc.com"
+            "email": "andy@andy-thorne.co.uk"
         }
     ],
     "require": {
         "zircote/swagger-php": "~2.0",
-        "symfony/symfony": "^2.7|^3.0"
+        "symfony/symfony": "^2.8|^3.0|^4.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8|^5.7"
