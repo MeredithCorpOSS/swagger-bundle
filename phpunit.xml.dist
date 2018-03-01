@@ -23,8 +23,8 @@
 >
     <php>
         <ini name="error_reporting" value="-1" />
-        <server name="KERNEL_DIR" value="tests/app" />
-        <env name="KERNEL_CLASS" value="AppKernel" />
+        <env name="KERNEL_DIR" value="tests/src" />
+        <env name="KERNEL_CLASS" value="TimeInc\SwaggerBundle\Tests\AppKernel" />
     </php>
 
     <testsuites>

@@ -1,5 +1,7 @@
 <?php
 
+namespace TimeInc\SwaggerBundle\Tests;
+
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -43,10 +45,10 @@ class AppKernel extends Kernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        if (file_exists(__DIR__.'/config/config_'.$this->getEnvironment().'.yml')) {
-            $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+        if (file_exists($this->rootDir.'/../config/config_'.$this->getEnvironment().'.yml')) {
+            $loader->load($this->rootDir.'/../config/config_'.$this->getEnvironment().'.yml');
         } else {
-            $loader->load(__DIR__.'/config/config.yml');
+            $loader->load($this->rootDir.'/../config/config.yml');
         }
     }
 }
