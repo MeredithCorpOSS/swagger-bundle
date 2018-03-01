@@ -15,12 +15,13 @@
     </parameters>
 
     <services>
-        <service id="swagger" class="%swagger.class%">
+        <service id="TimeInc\SwaggerBundle\Swagger" public="true">
             <argument type="service" id="swagger.analysis"/>
             <argument type="service" id="swagger.analyser"/>
             <argument/>
             <argument/>
         </service>
+        <service id="swagger" alias="TimeInc\SwaggerBundle\Swagger" public="true"/>
         <service id="swagger.analyser" class="%swagger.analyser.class%"/>
         <service id="swagger.analysis" class="%swagger.analysis.class%"/>
 

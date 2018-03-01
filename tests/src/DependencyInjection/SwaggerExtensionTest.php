@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Filesystem\Filesystem;
 use TimeInc\SwaggerBundle\DependencyInjection\SwaggerExtension;
 use TimeInc\SwaggerBundle\Exception\SwaggerException;
+use TimeInc\SwaggerBundle\Swagger;
 use TimeInc\SwaggerBundle\Swagger\Annotation\AnnotationLoader;
 use TimeInc\SwaggerBundle\Tests\fixtures\TestApp\ExceptionTestBundle\ExceptionTestBundle;
 use TimeInc\SwaggerBundle\Tests\fixtures\TestApp\TestBundle\TestBundle;
@@ -68,9 +69,10 @@ class SwaggerExtensionTest extends \PHPUnit_Framework_TestCase
             $this->container
         );
 
-        $swagger = $this->container->getDefinition('swagger');
+        $swagger = $this->container->getDefinition(Swagger::class);
         $annotationDirs = $swagger->getArgument(3);
 
+        $this->assertTrue($this->container->hasAlias('swagger'));
         $this->assertInternalType('array', $annotationDirs);
         $this->assertCount(6, $annotationDirs);
         foreach ($annotationDirs as $annotationDir) {
@@ -109,7 +111,7 @@ class SwaggerExtensionTest extends \PHPUnit_Framework_TestCase
             $this->container
         );
 
-        $swagger = $this->container->getDefinition('swagger');
+        $swagger = $this->container->getDefinition(Swagger::class);
         $annotationDirs = $swagger->getArgument(3);
 
         $this->assertInternalType('array', $annotationDirs);
